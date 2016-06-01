@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/Content/DataTables")
+}
+
+
+
+<div class="row" ng-app="mgfuncApp" ng-controller="mgfuncCtrl">
+    <div ui-view></div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/angularui")
+    @Scripts.Render("~/bundles/mgfuncapp")
+}
+

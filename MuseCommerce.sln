@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{53DD1A91-4AFB-4F46-9AEC-61FD2F333823}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseCommerce.Data", "MuseCommerce.Data\MuseCommerce.Data.csproj", "{141E4A8C-1099-45A1-93D3-910AC1AD8FFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseCommerce.Core", "MuseCommerce.Core\MuseCommerce.Core.csproj", "{63A8694A-1258-4E74-95BB-6A906F9162A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseCommerce.Web", "MuseCommerce.Web\MuseCommerce.Web.csproj", "{F39FCA77-9F23-4C19-8915-D0D223ED2E0E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{141E4A8C-1099-45A1-93D3-910AC1AD8FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{141E4A8C-1099-45A1-93D3-910AC1AD8FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{141E4A8C-1099-45A1-93D3-910AC1AD8FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{141E4A8C-1099-45A1-93D3-910AC1AD8FFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63A8694A-1258-4E74-95BB-6A906F9162A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63A8694A-1258-4E74-95BB-6A906F9162A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63A8694A-1258-4E74-95BB-6A906F9162A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63A8694A-1258-4E74-95BB-6A906F9162A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F39FCA77-9F23-4C19-8915-D0D223ED2E0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F39FCA77-9F23-4C19-8915-D0D223ED2E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F39FCA77-9F23-4C19-8915-D0D223ED2E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F39FCA77-9F23-4C19-8915-D0D223ED2E0E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+EndGlobal

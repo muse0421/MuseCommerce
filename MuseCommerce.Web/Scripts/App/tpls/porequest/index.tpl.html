@@ -1,0 +1,67 @@
+﻿<div class="col-sm-12" ng-controller="IndexporequestCtrl">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>所有项目</h5>
+            <div class="ibox-tools">
+                <a ui-sref="create" class="btn btn-primary btn-xs">创建新项目</a>
+            </div>
+        </div>
+        <div class="ibox-content no-padding">
+            <form method="get" class="form-horizontal">
+
+                <div class="form-group row">
+
+                    <label class="col-sm-1 control-label">编号</label>
+
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" ng-model="FBillNo">
+                    </div>
+
+                    <label class="col-sm-1 control-label">日期</label>
+
+
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" ng-model="FDate">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="search()"> 搜索</button>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+    <div class="ibox">
+        <div class="ibox-content">
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>编号</th>
+                        <th>日期</th>
+                        <th>说明</th>
+                        <th>状态</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in porequests">
+                        <td>{{ x.Id }}</td>
+                        <td>{{ x.FBillNo }}</td>
+                        <td>{{ x.FDate }}</td>
+                        <td>{{ x.FNote }}</td>
+                        <td>{{ x.FStatus }}</td>
+                        <td class="project-actions">
+                            <a ui-sref="display({ID:'{{ x.Id }}'})" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看 </a>
+                            <a ui-sref="edit({ID:'{{ x.Id }}'})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 编辑 </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

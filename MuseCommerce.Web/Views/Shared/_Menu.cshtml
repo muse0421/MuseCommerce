@@ -1,0 +1,27 @@
+﻿@using MuseCommerce.Core.Common
+@using MuseCommerce.Data.Model
+@using System.Linq
+@model List<MGFunc>
+
+@{ foreach (MGFunc item in Model)
+ {
+    <li>
+        <a href="#">
+            <i class="fa fa-home"></i>
+            <span class="nav-label">@item.FName.Trim()</span>
+            <span class="fa arrow"></span>
+        </a>
+        <ul class="nav nav-second-level">
+            @{ foreach (MGFunc item2 in Model)
+             {
+                <li>
+                    <a class="J_menuItem" href="@item2.FUrl" data-index="0">@item2.FName.Trim()</a>
+                </li>
+             }
+            }
+        </ul>
+    </li>
+ }
+}
+
+

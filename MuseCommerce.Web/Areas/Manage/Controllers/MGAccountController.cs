@@ -1,0 +1,134 @@
+﻿using MuseCommerce.Data.Model;
+using MuseCommerce.Data.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Diagnostics;
+using MuseCommerce.Data.Model.Security;
+
+namespace MuseCommerce.Web.Areas.Manage.Controllers
+{
+    public class MGAccountController : Controller
+    {
+        // GET: Manage/MGAccount
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public JsonResult MGAccountInfo(string qname)
+        {
+            JsonResult json = new JsonResult() { };
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+
+            int total = 0;
+
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                context.Configuration.ProxyCreationEnabled = false;
+                IQueryable<MGAccount> Temp = context.Set<MGAccount>();
+
+                total = Temp.Count();
+                if (!string.IsNullOrEmpty(qname))
+                {
+                    Temp = Temp.Where(p => p.FUseName.StartsWith(qname));
+                }
+                var oData = Temp.ToList();
+
+                var items = new
+                {
+                    recordsTotal = total,
+                    data = oData
+                };
+
+                json.Data = items;
+
+                return json;
+            }
+        }
+
+        public JsonResult MGAccount(string id)
+        {
+            JsonResult json = new JsonResult() { };
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                context.Configuration.ProxyCreationEnabled = false;
+                IQueryable<MGAccount> Temp = context.Set<MGAccount>();
+
+
+                if (!string.IsNullOrEmpty(id))
+                {
+                    Temp = Temp.Where(p => p.Id.StartsWith(id));
+                }
+                var oData = Temp.FirstOrDefault();
+
+                var items = new
+                {
+                    data = oData
+                };
+
+                json.Data = items;
+
+                return json;
+            }
+        }
+
+        [HttpPut]
+        public JsonResult PutMGAccount(MGAccount oData)
+        {
+            JsonResult json = new JsonResult() { };
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                context.Configuration.ProxyCreationEnabled = false;
+
+
+                var oTemp = context.Set<MGAccount>().Where(p => p.Id == oData.Id).First();
+               
+                context.SaveChanges();
+
+                var items = new
+                {
+                    success = true
+                };
+
+                json.Data = items;
+
+                return json;
+            }
+        }
+
+        [HttpPost]
+        public JsonResult SaveMGAccount(MGAccount oData)
+        {
+            JsonResult json = new JsonResult() { };
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                context.Configuration.ProxyCreationEnabled = false;
+
+                oData.CreatedBy = User.Identity.Name;
+                oData.CreatedDate = DateTime.Now;
+
+                context.Set<MGAccount>().Add(oData);
+
+                context.SaveChanges();
+
+                var items = new
+                {
+                    success = true
+                };
+
+                json.Data = items;
+
+                return json;
+            }
+        }
+    }
+}

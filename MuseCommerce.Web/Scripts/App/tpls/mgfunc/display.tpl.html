@@ -1,0 +1,37 @@
+﻿<div class="col-sm-9" ng-controller="DisplayMGFuncCtrl">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="m-b-md">
+                            <a ui-sref="index" class="btn btn-white btn-xs pull-right">返回</a>
+                            <a ui-sref="edit({ID:'{{mgfuncid}}'})" class="btn btn-primary btn-xs pull-right">编辑项目</a>                           
+                            <h2>{{mgfunc.FName}}</h2>
+                        </div>
+                        <dl class="dl-horizontal">
+                            <dt>状态：</dt>
+                            <dd>
+                                <span class="label label-primary">进行中</span>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <dl class="dl-horizontal">
+                            <dt>ID：</dt>
+                            <dd>{{mgfunc.Id}}</dd>
+                            <dt>名称：</dt>
+                            <dd>{{mgfunc.FName}}</dd>
+                            <dt>路径：</dt>
+                            <dd>{{mgfunc.FUrl}}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
