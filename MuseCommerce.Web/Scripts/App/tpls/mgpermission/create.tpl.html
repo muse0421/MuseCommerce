@@ -1,0 +1,33 @@
+﻿<div class="col-sm-6" ng-controller="CreatemgpermissionCtrl">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="ibox">
+            <div class="ibox-content">
+                
+                <form class="form-horizontal m-t" name="commentForm" novalidate>                    
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">名称：</label>
+                        <div class="col-sm-8">
+                            <input id="FName" name="FName" type="text" class="form-control" ng-model="mgpermission.FName" required=""  />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">描述：</label>
+                        <div class="col-sm-8">
+                            <input id="FDescription" name="FDescription" type="text" class="form-control" ng-model="mgpermission.FDescription" required="" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-3">
+                            <button ng-click="save()" class="btn btn-primary" type="submit"
+                                    ng-disabled="commentForm.FName.$invalid||commentForm.FDescription.$invalid">
+                                提交
+                            </button>
+                            <button ui-sref="index" class="btn btn-white" type="button">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,7 +11,7 @@ using MuseCommerce.Web.SignalR;
 
 namespace MuseCommerce.Web.Areas.Manage.Controllers
 {
-    public class MGRoleController : Controller
+    public class MGRoleController : MuseController
     {
         // GET: Manage/MGRole
         public ActionResult Index()
@@ -75,6 +75,38 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
                 json.Data = items;
 
                 return json;
+            }
+        }
+
+        public JsonResult MGRoleAssignment(string id)
+        {
+            JsonResult json = new JsonResult() { };
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            json.RecursionLimit = 2;
+
+
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {                
+                context.Configuration.ProxyCreationEnabled = false;
+                context.Configuration.LazyLoadingEnabled = true;
+                IQueryable<MGRole> Temp = context.Set<MGRole>().Include("FPermissions");
+
+
+                if (!string.IsNullOrEmpty(id))
+                {
+                    Temp = Temp.Where(p => p.Id.StartsWith(id));
+                }
+                
+                var oData = Temp.FirstOrDefault();
+               
+                var items = new
+                {
+                    data = oData
+                };
+
+                json.Data = items;
+
+                return Json(items,JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -177,5 +209,36 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
 
             return json;
         }
+
+        
+        public JsonResult SaveMGRolePermission(MGRole oData)
+        {
+            JsonResult json = new JsonResult() { };
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                context.Configuration.ProxyCreationEnabled = false;
+
+                var oTemp = context.Set<MGRole>().Where(p => p.Id == oData.Id).First();
+                oTemp.FName = oData.FName;
+                oTemp.FDescription = oData.FDescription;
+
+                oTemp.ModifiedBy = User.Identity.Name;
+                oTemp.ModifiedDate = DateTime.Now;
+
+                context.SaveChanges();
+
+                var items = new
+                {
+                    success = true
+                };
+
+                json.Data = items;
+
+                return json;
+            }
+        }
+
     }
 }

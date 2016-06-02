@@ -12,6 +12,7 @@ namespace MuseCommerce.Web
                     "~/Content/bootstrap.min14ed.css",
                     "~/Content/font-awesome.min93e3.css",                    
                     "~/Content/animate.min.css",
+                    "~/Content/plugins/iCheck/custom.css",
                     "~/Content/plugins/toastr/toastr.min.css",
                     "~/Content/plugins/sweetalert/sweetalert.css",
                     "~/Content/style.min862f.css"));
@@ -72,7 +73,6 @@ namespace MuseCommerce.Web
                        "~/Scripts/App/mgfunc.js"));
             bundles.Add(new ScriptBundle("~/bundles/mgroleapp").Include(
                       "~/Scripts/App/mgrole.js"));
-
             bundles.Add(new ScriptBundle("~/bundles/mgaccountapp").Include(
                      "~/Scripts/App/mgaccount.js"));
             bundles.Add(new ScriptBundle("~/bundles/mgpermissionapp").Include(

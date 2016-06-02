@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace MuseCommerce.Web.Areas.Order.Controllers
 {
-    public class PORequestController : Controller
+    public class PORequestController : MuseController
     {
         // GET: Order/PORequest
         public ActionResult Index()

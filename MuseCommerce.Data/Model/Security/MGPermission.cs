@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace MuseCommerce.Data.Model.Security
 {
@@ -18,6 +20,7 @@ namespace MuseCommerce.Data.Model.Security
         [Required]
         public string FDescription { set; get; }
 
+        [IgnoreDataMember]        
         public virtual List<MGRole> FRoles { get; set; }
     }
 }

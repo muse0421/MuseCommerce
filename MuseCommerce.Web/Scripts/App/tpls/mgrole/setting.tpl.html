@@ -1,0 +1,47 @@
+﻿<div class="col-sm-6" ng-controller="SettingmgroleCtrl">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="m-b-md">
+                            <a ui-sref="index" class="btn btn-white btn-xs pull-right">返回</a>
+                            <a ng-click="save()" class="btn btn-primary btn-xs pull-right">保存</a>
+                            <h2>{{mgrole.FName}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <form class="form-horizontal m-t" id="commentForm" action="/Manage/mgrole/SaveMGRolePermission">
+                    <div class="row">
+                        <div class="ibox-content">
+                            <h4>權限列表</h4>
+                            <input type="hidden" value="{{ mgrole.Id }}" name="MGRole.Id" id="MGRole.Id" />
+                            <input type="hidden" value="{{ mgrole.FName }}" name="MGRole.FName" id="MGRole.FName" />
+
+                            <ul class="todo-list m-t" ng-repeat="x in mgpermissionInfo">
+                                <li>
+                                    <input type="checkbox"  ng-model="x.check"
+                                           name="MGRole.Permissions[{{$index}}].Id" class="i-checks" />
+
+                                    <span class="m-l-xs">{{ x.FName }}</span>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="m-b-md">
+                                <a ui-sref="index" class="btn btn-white btn-xs pull-right">返回</a>
+                                <button type="submit" class="btn btn-primary btn-xs pull-right">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

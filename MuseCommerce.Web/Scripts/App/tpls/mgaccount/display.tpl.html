@@ -1,0 +1,28 @@
+﻿<div class="col-sm-6" ng-controller="DisplaymgaccountCtrl">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="m-b-md">
+                            <a ui-sref="index" class="btn btn-white btn-xs pull-right">返回</a>
+                            <a ui-sref="edit({ID:'{{mgaccountid}}'})" class="btn btn-primary btn-xs pull-right">编辑</a>                           
+                            <h2>{{mgaccount.FUseName}}</h2>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <dl class="dl-horizontal">                            
+                            <dt>類型:</dt>
+                            <dd>{{mgaccount.FUserType}}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

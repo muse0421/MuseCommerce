@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace MuseCommerce.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : MuseController
     {
         // GET: Default
         public async Task<ActionResult> Index()

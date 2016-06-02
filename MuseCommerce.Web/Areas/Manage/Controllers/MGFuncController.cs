@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace MuseCommerce.Web.Areas.Manage.Controllers
 {
-    public class MGFuncController : Controller
+    public class MGFuncController : MuseController
     {
         // GET: Manage/MGFunc
         public ActionResult Index()

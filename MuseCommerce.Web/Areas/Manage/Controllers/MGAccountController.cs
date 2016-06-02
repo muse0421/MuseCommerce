@@ -7,10 +7,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Diagnostics;
 using MuseCommerce.Data.Model.Security;
+using MuseCommerce.Web.SignalR;
 
 namespace MuseCommerce.Web.Areas.Manage.Controllers
 {
-    public class MGAccountController : Controller
+    public class MGAccountController : MuseController
     {
         // GET: Manage/MGAccount
         public ActionResult Index()
@@ -87,9 +88,13 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
             {
                 context.Configuration.ProxyCreationEnabled = false;
 
-
                 var oTemp = context.Set<MGAccount>().Where(p => p.Id == oData.Id).First();
-               
+                oTemp.FUseName = oData.FUseName;
+                oTemp.FUserType = oData.FUserType;
+
+                oTemp.ModifiedBy = User.Identity.Name;
+                oTemp.ModifiedDate = DateTime.Now;
+
                 context.SaveChanges();
 
                 var items = new
@@ -112,23 +117,61 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
             using (ApplicationDbContext context = new ApplicationDbContext())
             {
                 context.Configuration.ProxyCreationEnabled = false;
-
+                oData.Id = Guid.NewGuid().ToString();
                 oData.CreatedBy = User.Identity.Name;
                 oData.CreatedDate = DateTime.Now;
 
                 context.Set<MGAccount>().Add(oData);
 
+                
                 context.SaveChanges();
 
-                var items = new
-                {
-                    success = true
-                };
 
-                json.Data = items;
-
-                return json;
             }
+
+
+            NoticeMessageSubSystem.SendMessage("新增帳號:" + oData.FUseName);
+
+            var items = new
+            {
+                success = true
+            };
+
+            json.Data = items;
+
+            return json;
+        }
+
+        [HttpDelete]
+        public JsonResult DeleteMGAccount(string FID)
+        {
+            JsonResult json = new JsonResult() { };
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            try
+            {
+                using (ApplicationDbContext context = new ApplicationDbContext())
+                {
+                    var oTemp = context.Set<MGAccount>().Where(p => p.Id == FID).First();
+
+                    context.MGAccount.Remove(oTemp);
+
+                    context.SaveChanges();
+
+                }
+            }
+            catch (Exception EX)
+            {
+                MvcApplication.mySource.TraceEvent(TraceEventType.Error, 3, EX.ToString());
+            }
+
+            var items = new
+            {
+                success = true
+            };
+
+            json.Data = items;
+
+            return json;
         }
     }
 }

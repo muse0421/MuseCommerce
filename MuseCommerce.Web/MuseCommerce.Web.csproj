@@ -193,6 +193,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MuseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignalR\NoticeMessageHub.cs" />
     <Compile Include="Startup.cs" />
@@ -2499,10 +2500,21 @@
     <Content Include="Scripts\angularjs-latest\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\angularjs-latest\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\angularjs-latest\version.txt" />
+    <Content Include="Scripts\App\mgaccount.js" />
+    <Content Include="Scripts\App\mgpermission.js" />
     <Content Include="Scripts\App\mgrole.js" />
     <Content Include="Scripts\App\porequest.js" />
     <Content Include="Scripts\App\mgfunc.js" />
+    <Content Include="Scripts\App\tpls\mgpermission\create.tpl.html" />
+    <Content Include="Scripts\App\tpls\mgpermission\display.tpl.html" />
+    <Content Include="Scripts\App\tpls\mgpermission\edit.tpl.html" />
+    <Content Include="Scripts\App\tpls\mgpermission\index.tpl.html" />
+    <Content Include="Scripts\App\tpls\mgaccount\create.tpl.html" />
+    <Content Include="Scripts\App\tpls\mgaccount\display.tpl.html" />
+    <Content Include="Scripts\App\tpls\mgaccount\edit.tpl.html" />
+    <Content Include="Scripts\App\tpls\mgaccount\index.tpl.html" />
     <Content Include="Scripts\App\tpls\mgrole\create.tpl.html" />
+    <Content Include="Scripts\App\tpls\mgrole\setting.tpl.html" />
     <Content Include="Scripts\App\tpls\mgrole\display.tpl.html" />
     <Content Include="Scripts\App\tpls\mgrole\edit.tpl.html" />
     <Content Include="Scripts\App\tpls\mgrole\index.tpl.html" />

@@ -4,3 +4,14 @@ D:\Lession\MuseCommerce\MuseCommerce.Core\bin\Debug\MuseCommerce.Core.pdb
 D:\Lession\MuseCommerce\MuseCommerce.Core\obj\Debug\MuseCommerce.Core.dll
 D:\Lession\MuseCommerce\MuseCommerce.Core\obj\Debug\MuseCommerce.Core.pdb
 D:\Lession\MuseCommerce\MuseCommerce.Core\obj\Debug\MuseCommerce.Core.csprojResolveAssemblyReference.cache
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\MuseCommerce.Core.dll.config
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\MuseCommerce.Core.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\MuseCommerce.Core.pdb
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\obj\Debug\MuseCommerce.Core.csprojResolveAssemblyReference.cache
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\obj\Debug\MuseCommerce.Core.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\obj\Debug\MuseCommerce.Core.pdb
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\EntityFramework.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\EntityFramework.SqlServer.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\EntityFramework.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\EntityFramework.SqlServer.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Newtonsoft.Json.dll

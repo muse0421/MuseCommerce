@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,14 +8,13 @@
 }
 
 
-
-<div class="row" ng-app="mgfuncApp" ng-controller="mgfuncCtrl">
+<div class="row" ng-app="mgpermissionApp" ng-controller="mgpermissionCtrl">
     <div ui-view></div>
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/angularui")
-    @Scripts.Render("~/bundles/mgfuncapp")
+    @Scripts.Render("~/bundles/mgpermissionapp")
 }
 

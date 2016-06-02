@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace MuseCommerce.Web.Controllers
 {
-    public class ManageController : Controller
+    public class ManageController : MuseController
     {
         // GET: Manage
         public ActionResult Index()

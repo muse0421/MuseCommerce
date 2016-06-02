@@ -28,6 +28,12 @@ app.controller('mgroleCtrl', function ($scope, $http) {
             views: {
                 '': { templateUrl: '/Scripts/App/tpls/mgrole/display.tpl.html' }
             }
+        })
+        .state('setting', {
+            url: '/setting/{ID}',
+            views: {
+                '': { templateUrl: '/Scripts/App/tpls/mgrole/setting.tpl.html' }
+            }
         });
 
     $urlRouterProvider.otherwise('/index');
@@ -42,10 +48,10 @@ app.controller('mgroleCtrl', function ($scope, $http) {
 app.controller('IndexmgroleCtrl', function ($scope, $http, $state, $stateParams) {
 
     $scope.qname = "";
-    $scope.qurl = "";
+    $scope.qdescription = "";
 
     $scope.search = function () {
-        var config = { params: { 'qname': $scope.qname, 'qurl': $scope.qurl } };
+        var config = { params: { 'qname': $scope.qname, 'qdescription': $scope.qdescription } };
         $http.get("/Manage/mgrole/mgroleInfo", config)
         .success(function (response) { $scope.mgroles = response.data; });
 
@@ -147,5 +153,79 @@ app.controller('CreatemgroleCtrl', function ($scope, $http, $state, $stateParams
             $rootScope.$state.go('index');
         });
     };
+
+});
+
+
+app.controller('SettingmgroleCtrl', function ($scope, $http, $state, $stateParams, $rootScope) {
+    $scope.mgroleid = $stateParams.ID;
+       
+
+    $scope.loadmgrole = function () {
+
+        var config = { params: { 'ID': $stateParams.ID } };
+        $http.get("/Manage/mgrole/MGRoleAssignment", config)
+        .success(function (response) {
+            $scope.mgrole = response.data;
+            console.log(response.data);
+
+
+            $http.get("/Manage/mgpermission/mgpermissionInfo", config)
+          .success(function (response) {
+
+              angular.forEach(response.data, function (item) {
+                  item.check = true;
+
+                  if ($scope.mgrole.FPermissions != null) {
+                      console.log($scope.mgrole.FPermissions.length);
+                      if($scope.mgrole.FPermissions.length>0)
+                      {
+                          angular.forEach($scope.mgrole.FPermissions, function (pitem) {
+                              if(pitem.Id==item.Id)
+                              {
+                                  item.check = false;
+                              }
+                          });
+                      }
+                  }
+              });
+
+              
+
+              $scope.mgpermissionInfo = response.data;
+              console.log(response.data);
+
+          });
+
+        });
+
+       
+    };
+
+    $scope.save = function () {
+        var config = {};
+        var mydata = $("#commentForm").serializeArray();
+        var data = { 'oData': $scope.mgrole, 'Permissions': mydata };
+        
+
+        //console.log($scope.mgrole);
+        console.log(data);
+
+        //angular.fromJson(mydata);
+        //console.log(JSON.stringify(mydata));
+        //console.log(eval(mydata));
+        //return;
+
+        $http.put("/Manage/mgrole/SaveMGRolePermission", data, config)
+        .success(function (response) {
+            $scope.success = response.success;
+            console.log('save');
+            console.log(response);
+            console.log($scope.success);
+            //$rootScope.$state.go('index');
+        });
+    };
+
+    $scope.loadmgrole();
 
 });

@@ -7,10 +7,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Diagnostics;
 using MuseCommerce.Data.Model.Security;
+using MuseCommerce.Web.SignalR;
 
 namespace MuseCommerce.Web.Areas.Manage.Controllers
 {
-    public class MGPermissionController : Controller
+    public class MGPermissionController : MuseController
     {
         // GET: Manage/MGPermission
         public ActionResult Index()
@@ -87,10 +88,12 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
             {
                 context.Configuration.ProxyCreationEnabled = false;
 
-
                 var oTemp = context.Set<MGPermission>().Where(p => p.Id == oData.Id).First();
                 oTemp.FName = oData.FName;
-                
+                oTemp.FDescription = oData.FDescription;
+
+                oTemp.ModifiedBy = User.Identity.Name;
+                oTemp.ModifiedDate = DateTime.Now;
 
                 context.SaveChanges();
 
@@ -110,27 +113,69 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
         {
             JsonResult json = new JsonResult() { };
             json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-
-            using (ApplicationDbContext context = new ApplicationDbContext())
+            try
             {
-                context.Configuration.ProxyCreationEnabled = false;
-
-                oData.CreatedBy = User.Identity.Name;
-                oData.CreatedDate = DateTime.Now;
-
-                context.Set<MGPermission>().Add(oData);
-
-                context.SaveChanges();
-
-                var items = new
+                using (ApplicationDbContext context = new ApplicationDbContext())
                 {
-                    success = true
-                };
+                    context.Configuration.ProxyCreationEnabled = false;
+                    oData.Id = Guid.NewGuid().ToString();
+                    oData.CreatedBy = User.Identity.Name;
+                    oData.CreatedDate = DateTime.Now;
 
-                json.Data = items;
+                    context.Set<MGPermission>().Add(oData);
 
-                return json;
+                    context.SaveChanges();
+
+
+                }
             }
+            catch (Exception EX)
+            {
+                MvcApplication.mySource.TraceEvent(TraceEventType.Error, 3, EX.ToString());
+            }
+
+            NoticeMessageSubSystem.SendMessage("新增權限:" + oData.FName);
+
+            var items = new
+            {
+                success = true
+            };
+
+            json.Data = items;
+
+            return json;
+        }
+
+        [HttpDelete]
+        public JsonResult DeleteMGPermission(string FID)
+        {
+            JsonResult json = new JsonResult() { };
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            try
+            {
+                using (ApplicationDbContext context = new ApplicationDbContext())
+                {
+                    var oTemp = context.Set<MGPermission>().Where(p => p.Id == FID).First();
+
+                    context.MGPermission.Remove(oTemp);
+
+                    context.SaveChanges();
+
+                }
+            }
+            catch (Exception EX)
+            {
+                MvcApplication.mySource.TraceEvent(TraceEventType.Error, 3, EX.ToString());
+            }
+
+            var items = new
+            {
+                success = true
+            };
+
+            json.Data = items;
+
+            return json;
         }
     }
 }
