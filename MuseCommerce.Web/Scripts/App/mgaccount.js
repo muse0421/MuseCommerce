@@ -28,6 +28,12 @@ app.controller('mgaccountCtrl', function ($scope, $http) {
             views: {
                 '': { templateUrl: '/Scripts/App/tpls/mgaccount/display.tpl.html' }
             }
+        })
+        .state('setting', {
+            url: '/setting/{ID}',
+            views: {
+                '': { templateUrl: '/Scripts/App/tpls/mgaccount/setting.tpl.html' }
+            }
         });
 
     $urlRouterProvider.otherwise('/index');
@@ -147,5 +153,87 @@ app.controller('CreatemgaccountCtrl', function ($scope, $http, $state, $statePar
             $rootScope.$state.go('index');
         });
     };
+
+});
+
+
+
+app.controller('SettingmgaccountCtrl', function ($scope, $http, $state, $stateParams, $rootScope) {
+    $scope.mgaccountid = $stateParams.ID;
+
+
+    $scope.loadmgaccount = function () {
+
+        var config = { params: { 'ID': $stateParams.ID } };
+        $http.get("/Manage/mgaccount/MGRoleAssignment", config)
+        .success(function (response) {
+            $scope.mgaccount = response.data;
+            console.log(response.data);
+
+
+            $http.get("/Manage/mgrole/MGRoleInfo", config)
+          .success(function (response) {
+
+              angular.forEach(response.data, function (item) {
+                  item.check = false;
+
+                  if ($scope.mgaccount.FRoles != null) {
+                      console.log($scope.mgaccount.FRoles.length);
+                      if ($scope.mgaccount.FRoles.length > 0) {
+                          angular.forEach($scope.mgaccount.FRoles, function (pitem) {
+                              if (pitem.Id == item.Id) {
+                                  item.check = true;
+                              }
+                          });
+                      }
+                  }
+              });
+
+              $scope.mgpermissionInfo = response.data;
+              console.log(response.data);
+
+          });
+
+        });
+
+
+    };
+
+    $scope.save = function () {
+        var config = {};
+
+
+        $scope.mgaccount.FRoles.splice(0, $scope.mgaccount.FRoles.length);
+        angular.forEach($scope.mgpermissionInfo, function (item) {
+            console.log(item.FName);
+            console.log(item.check);
+
+            if (item.check == true) {
+                $scope.mgaccount.FRoles.push(item);
+            }
+
+        });
+
+        var data = { 'oData': $scope.mgaccount };
+
+        //
+        console.log(data);
+        console.log($scope.mgaccount.FRoles);
+        //angular.fromJson(mydata);
+        //console.log(JSON.stringify(mydata));
+        //console.log(eval(mydata));
+        //return;
+
+        $http.post("/Manage/mgaccount/SaveMGRoleAssignment", data, config)
+        .success(function (response) {
+            $scope.success = response.success;
+            console.log('save');
+            console.log(response);
+            console.log($scope.success);
+            $rootScope.$state.go('index');
+        });
+    };
+
+    $scope.loadmgaccount();
 
 });

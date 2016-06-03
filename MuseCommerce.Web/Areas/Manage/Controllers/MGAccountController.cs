@@ -78,6 +78,29 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
             }
         }
 
+        public JsonResult MGRoleAssignment(string id)
+        {
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                context.Configuration.ProxyCreationEnabled = false;
+                IQueryable<MGAccount> Temp = context.Set<MGAccount>().Include("FRoles");
+                
+
+                if (!string.IsNullOrEmpty(id))
+                {
+                    Temp = Temp.Where(p => p.Id.StartsWith(id));
+                }
+                var oData = Temp.FirstOrDefault();
+                
+                var items = new
+                {
+                    data = oData
+                };
+
+                return Json(items, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         [HttpPut]
         public JsonResult PutMGAccount(MGAccount oData)
         {
@@ -173,5 +196,54 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
 
             return json;
         }
+
+        [HttpPost]
+        public JsonResult SaveMGRoleAssignment(MGAccount oData)
+        {
+            JsonResult json = new JsonResult() { };
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                context.Configuration.ProxyCreationEnabled = false;
+
+                var oTemp = context.Set<MGAccount>().Include("FRoles")
+                    .Where(p => p.Id == oData.Id).First();
+               
+                oTemp.ModifiedBy = User.Identity.Name;
+                oTemp.ModifiedDate = DateTime.Now;
+
+
+                oData.FRoles.ForEach(item =>
+                {
+                    if (!oTemp.FRoles.Exists(m => m.Id == item.Id))
+                    {
+                        context.Set<MGRole>().Attach(item);
+                        oTemp.FRoles.Add(item);
+                    }
+                });
+
+                oTemp.FRoles.ForEach(item =>
+                {
+                    if (!oData.FRoles.Exists(m => m.Id == item.Id))
+                    {
+                        oTemp.FRoles.Remove(item);
+                    }
+                });
+
+
+                context.SaveChanges();
+
+                var items = new
+                {
+                    success = true
+                };
+
+                json.Data = items;
+
+                return json;
+            }
+        }
+
     }
 }

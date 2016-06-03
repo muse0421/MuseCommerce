@@ -225,13 +225,13 @@ app.controller('SettingmgroleCtrl', function ($scope, $http, $state, $stateParam
         //console.log(eval(mydata));
         //return;
 
-        $http.put("/Manage/mgrole/SaveMGRolePermission", data, config)
+        $http.post("/Manage/mgrole/SaveMGRolePermission", data, config)
         .success(function (response) {
             $scope.success = response.success;
             console.log('save');
             console.log(response);
             console.log($scope.success);
-            //$rootScope.$state.go('index');
+            $rootScope.$state.go('index');
         });
     };
 

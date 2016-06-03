@@ -2513,6 +2513,7 @@
     <Content Include="Scripts\App\tpls\mgaccount\display.tpl.html" />
     <Content Include="Scripts\App\tpls\mgaccount\edit.tpl.html" />
     <Content Include="Scripts\App\tpls\mgaccount\index.tpl.html" />
+    <Content Include="Scripts\App\tpls\mgaccount\setting.tpl.html" />
     <Content Include="Scripts\App\tpls\mgrole\create.tpl.html" />
     <Content Include="Scripts\App\tpls\mgrole\setting.tpl.html" />
     <Content Include="Scripts\App\tpls\mgrole\display.tpl.html" />

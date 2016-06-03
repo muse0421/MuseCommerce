@@ -1,4 +1,4 @@
-﻿<div class="col-sm-6" ng-controller="SettingmgroleCtrl">
+﻿<div class="col-sm-6" ng-controller="SettingmgaccountCtrl">
     <div class="wrapper wrapper-content animated fadeInUp">
         <div class="ibox">
             <div class="ibox-content">
@@ -7,21 +7,20 @@
                         <div class="m-b-md">
                             <a ui-sref="index" class="btn btn-white btn-xs pull-right">返回</a>
                             <a ng-click="save()" class="btn btn-primary btn-xs pull-right">保存</a>
-                            <h2>{{mgrole.FName}}</h2>
+                            <h2>{{mgaccount.FUseName}}</h2>
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="ibox-content">
-                        <h4>權限列表</h4>
-                        <input type="hidden" value="{{ mgrole.Id }}" name="MGRole.Id" id="MGRole.Id" />
-                        <input type="hidden" value="{{ mgrole.FName }}" name="MGRole.FName" id="MGRole.FName" />
+                        <h4>角色列表</h4>
+                        <input type="hidden" value="{{ mgaccount.Id }}" name="mgaccount.Id" id="mgaccount.Id" />
+                        <input type="hidden" value="{{ mgaccount.FName }}" name="mgaccount.FName" id="mgaccount.FName" />
 
                         <ul class="todo-list m-t" ng-repeat="x in mgpermissionInfo">
                             <li>
                                 <input type="checkbox" ng-model="x.check" ng-true-value="true" ng-false-value="false"
-                                       name="MGRole.Permissions[{{$index}}].Id" class="i-checks" />
+                                       name="mgaccount.Permissions[{{$index}}].Id" class="i-checks" />
 
                                 <span class="m-l-xs">{{ x.FName }}</span>
                             </li>
@@ -34,7 +33,7 @@
                         <div class="m-b-md">
                             <a ui-sref="index" class="btn btn-white btn-xs pull-right">返回</a>
                             <a ng-click="save()" class="btn btn-primary btn-xs pull-right">保存</a>
-                            <h2>{{mgrole.FName}}</h2>
+                            <h2>{{mgaccount.FName}}</h2>
                         </div>
                     </div>
                 </div>

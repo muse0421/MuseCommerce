@@ -80,11 +80,6 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
 
         public JsonResult MGRoleAssignment(string id)
         {
-            JsonResult json = new JsonResult() { };
-            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-            json.RecursionLimit = 2;
-
-
             using (ApplicationDbContext context = new ApplicationDbContext())
             {                
                 context.Configuration.ProxyCreationEnabled = false;
@@ -103,8 +98,6 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
                 {
                     data = oData
                 };
-
-                json.Data = items;
 
                 return Json(items,JsonRequestBehavior.AllowGet);
             }
@@ -210,7 +203,7 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
             return json;
         }
 
-        
+         [HttpPost]
         public JsonResult SaveMGRolePermission(MGRole oData)
         {
             JsonResult json = new JsonResult() { };
