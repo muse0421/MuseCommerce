@@ -220,12 +220,31 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
             {
                 context.Configuration.ProxyCreationEnabled = false;
 
-                var oTemp = context.Set<MGRole>().Where(p => p.Id == oData.Id).First();
+                var oTemp = context.Set<MGRole>().Include("FPermissions")
+                    .Where(p => p.Id == oData.Id).First();
                 oTemp.FName = oData.FName;
                 oTemp.FDescription = oData.FDescription;
 
                 oTemp.ModifiedBy = User.Identity.Name;
                 oTemp.ModifiedDate = DateTime.Now;
+
+                
+                oData.FPermissions.ForEach(item => {
+                    if (!oTemp.FPermissions.Exists(m => m.Id == item.Id))
+                    {
+                        context.Set<MGPermission>().Attach(item);
+                        oTemp.FPermissions.Add(item);
+                    }
+                });
+
+                oTemp.FPermissions.ForEach(item =>
+                {
+                    if (!oData.FPermissions.Exists(m => m.Id == item.Id))
+                    {
+                        oTemp.FPermissions.Remove(item);
+                    }
+                }); 
+                
 
                 context.SaveChanges();
 

@@ -20,7 +20,7 @@
 
                             <ul class="todo-list m-t" ng-repeat="x in mgpermissionInfo">
                                 <li>
-                                    <input type="checkbox"  ng-model="x.check"
+                                    <input type="checkbox" ng-model="x.check" ng-true-value="true" ng-false-value="false"
                                            name="MGRole.Permissions[{{$index}}].Id" class="i-checks" />
 
                                     <span class="m-l-xs">{{ x.FName }}</span>

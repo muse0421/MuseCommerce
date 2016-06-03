@@ -174,7 +174,7 @@ app.controller('SettingmgroleCtrl', function ($scope, $http, $state, $stateParam
           .success(function (response) {
 
               angular.forEach(response.data, function (item) {
-                  item.check = true;
+                  item.check = false;
 
                   if ($scope.mgrole.FPermissions != null) {
                       console.log($scope.mgrole.FPermissions.length);
@@ -183,14 +183,12 @@ app.controller('SettingmgroleCtrl', function ($scope, $http, $state, $stateParam
                           angular.forEach($scope.mgrole.FPermissions, function (pitem) {
                               if(pitem.Id==item.Id)
                               {
-                                  item.check = false;
+                                  item.check = true;
                               }
                           });
                       }
                   }
               });
-
-              
 
               $scope.mgpermissionInfo = response.data;
               console.log(response.data);
@@ -203,14 +201,25 @@ app.controller('SettingmgroleCtrl', function ($scope, $http, $state, $stateParam
     };
 
     $scope.save = function () {
-        var config = {};
-        var mydata = $("#commentForm").serializeArray();
-        var data = { 'oData': $scope.mgrole, 'Permissions': mydata };
+        var config = {};        
         
+        
+        $scope.mgrole.FPermissions.splice(0, $scope.mgrole.FPermissions.length);
+        angular.forEach($scope.mgpermissionInfo, function (item) {
+            console.log(item.FName);
+            console.log(item.check);
+                        
+            if (item.check == true) {
+                $scope.mgrole.FPermissions.push(item);
+            }
 
-        //console.log($scope.mgrole);
+        });
+
+        var data = { 'oData': $scope.mgrole };
+
+        //
         console.log(data);
-
+        console.log($scope.mgrole.FPermissions);
         //angular.fromJson(mydata);
         //console.log(JSON.stringify(mydata));
         //console.log(eval(mydata));
