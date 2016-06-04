@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using MuseCommerce.Core.Security;
+using System.Web;
 using System.Web.Mvc;
 
 namespace MuseCommerce.Web
@@ -8,6 +9,7 @@ namespace MuseCommerce.Web
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new CheckPermissionAttribute());
         }
     }
 }

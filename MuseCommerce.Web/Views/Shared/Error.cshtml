@@ -3,21 +3,43 @@
 @{
     ViewBag.Title = "Error";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<div class="middle-box text-center animated fadeInDown">
-    <h1>500</h1>
-    <h3 class="font-bold">服务器内部错误</h3>
 
-    <div class="error-desc">
+}
+<div class="wrapper wrapper-content  animated fadeInRight article">
+    <div class="row">
         @{if (Model != null)
         {
 
-            <ul>
-                <li><span class="label">Exception Type</span>: @Model.Exception.GetType().FullName</li>
-                <li><span class="label">StackTrace</span>: @Model.Exception.StackTrace</li>
-            </ul>
-        }}        
-        <br />您可以返回主页看看
-        <br /><a href="/Home/Index" class="btn btn-primary m-t">主页</a>
+            <div class="col-lg-10 col-lg-offset-1">
+                <div class="ibox">
+
+                    <div class="text-center article-title">
+                        <h2>
+                            @Model.Exception.GetType().FullName
+                        </h2>
+                    </div>
+                    <div class="well">
+                        @Model.Exception.StackTrace
+                    </div>
+
+                </div>
+            </div>
+
+        }
+        else
+        {
+            <div class="text-center article-title ">
+                <h1 class="m-xs">500</h1>
+            </div>
+        }
+        }
+    </div>
+
+    <div class="row">
+        <div class="text-center error-desc">
+            <br />您可以返回主页看看
+            <br /><a href="/Home/Index" class="btn btn-primary m-t">主页</a>
+        </div>
+
     </div>
 </div>

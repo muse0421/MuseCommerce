@@ -76,7 +76,9 @@ namespace MuseCommerce.Core.Exception_Handling
                 actionDescriptor = Descriptor.FindAction(ControllerContext, handleErrorAction);
             }
 
-            filterContext.Result = Json(new ExceptionDetail(exceptionToThrow, errorMessage));
+            //filterContext.Result = View("Error", new ExtendedHandleErrorInfo(exceptionToThrow, controllerName, actionName, errorMessage));
+
+            //filterContext.Result = Json(new ExceptionDetail(exceptionToThrow, errorMessage),JsonRequestBehavior.AllowGet);
             return;
 
             if (actionDescriptor == null)

@@ -8,12 +8,22 @@ using System.Web.Mvc;
 using System.Diagnostics;
 using MuseCommerce.Data.Model.Security;
 using MuseCommerce.Web.SignalR;
+using MuseCommerce.Core.Security;
+using MuseCommerce.Data.Security;
 
 namespace MuseCommerce.Web.Areas.Manage.Controllers
 {
     public class MGRoleController : MuseController
     {
+        private readonly ISecurityService _securityService;
+
+        public MGRoleController()
+        {
+            _securityService = new SecurityService();
+        }
+
         // GET: Manage/MGRole
+        [CheckPermission(Permissions = new[] { PredefinedPermissions.ModuleQuery, PredefinedPermissions .ModuleManage})]
         public ActionResult Index()
         {
             return View();
@@ -21,6 +31,10 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
 
         public JsonResult MGRoleInfo(string qname)
         {
+
+            var jsAjax = Request.IsAjaxRequest();
+           
+
             JsonResult json = new JsonResult() { };
             json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
 
@@ -54,6 +68,8 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
         {
             JsonResult json = new JsonResult() { };
             json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+
+            var jsAjax = Request.IsAjaxRequest();
 
             using (ApplicationDbContext context = new ApplicationDbContext())
             {

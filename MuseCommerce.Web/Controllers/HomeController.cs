@@ -21,12 +21,17 @@ namespace MuseCommerce.Web.Controllers
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new SecurityDbContext()));
             var SignInManager = HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             // HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            //ApplicationUser user1 = new ApplicationUser { Id = System.Guid.NewGuid().ToString(), UserName = "xpy", Email = "muse@hot.mail" };
-            //var result = await UserManager.CreateAsync(user1, "xiaohui");            
+            ApplicationUser user1 = new ApplicationUser { Id = System.Guid.NewGuid().ToString(), UserName = "xpy", Email = "muse@hot.mail" };
+            var result = await UserManager.CreateAsync(user1, "xiaohui");            
             //await SignInManager.SignInAsync(user1, isPersistent: false, rememberBrowser: false);
 
+            //int zero = 0;
+            //int res = 5 / zero;
 
-            var result = await SignInManager.PasswordSignInAsync("xpy", "xiaohui", false, shouldLockout: false);
+            var result2 = await SignInManager.PasswordSignInAsync("xpy", "xiaohui", false, shouldLockout: false);
+
+           await SignInManager.SignInAsync(user1, isPersistent: false, rememberBrowser: false);
+
 
             return View();
         }

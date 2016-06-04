@@ -47,6 +47,8 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Owin.
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\MuseCommerce.Core.dll
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Newtonsoft.Json.dll
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Owin.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\System.Web.Http.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\System.Net.Http.Formatting.dll
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\MuseCommerce.Core.pdb
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\EntityFramework.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\EntityFramework.SqlServer.xml
@@ -58,6 +60,8 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Owin.
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Owin.Security.Cookies.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Owin.Security.OAuth.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Newtonsoft.Json.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\System.Web.Http.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\System.Net.Http.Formatting.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.csprojResolveAssemblyReference.cache
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.Repositories.Migrations.Initial.resources
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.Repositories.Migrations.Initial1.resources

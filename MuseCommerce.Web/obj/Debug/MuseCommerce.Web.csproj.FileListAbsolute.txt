@@ -69,6 +69,7 @@ D:\Lession\MuseCommerce\MuseCommerce.Web\bin\Microsoft.AspNet.SignalR.Core.xml
 D:\Lession\MuseCommerce\MuseCommerce.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
 D:\Lession\MuseCommerce\MuseCommerce.Web\bin\Microsoft.AspNet.SignalR.Client.dll
 D:\Lession\MuseCommerce\MuseCommerce.Web\bin\Microsoft.AspNet.SignalR.Client.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\obj\Debug\MuseCommerce.Web.csprojResolveAssemblyReference.cache
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\MuseCommerce.Web.dll.config
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\MuseCommerce.Web.dll
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\MuseCommerce.Web.pdb
@@ -114,6 +115,8 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Microsoft.AspNet.Signa
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Microsoft.AspNet.SignalR.Core.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\System.Net.Http.Formatting.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\System.Web.Http.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\System.Web.Helpers.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\System.Web.Mvc.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\System.Web.Optimization.xml
@@ -123,8 +126,6 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\System.Web.WebPages.De
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\System.Web.WebPages.Razor.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Antlr3.Runtime.pdb
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Newtonsoft.Json.xml
-D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\System.Net.Http.Formatting.xml
-D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\System.Web.Http.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\System.Web.Http.WebHost.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\EntityFramework.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\EntityFramework.SqlServer.xml
@@ -137,6 +138,5 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Microsoft.Owin.Securit
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Microsoft.Owin.Security.Google.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\obj\Debug\MuseCommerce.Web.csprojResolveAssemblyReference.cache
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\obj\Debug\MuseCommerce.Web.dll
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\obj\Debug\MuseCommerce.Web.pdb

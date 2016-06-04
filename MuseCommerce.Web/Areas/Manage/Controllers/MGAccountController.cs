@@ -21,6 +21,8 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
 
         public JsonResult MGAccountInfo(string qname)
         {
+            var jsAjax = Request.IsAjaxRequest();
+
             JsonResult json = new JsonResult() { };
             json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
 
@@ -54,6 +56,8 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
         {
             JsonResult json = new JsonResult() { };
             json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+
+            var jsAjax = Request.IsAjaxRequest();
 
             using (ApplicationDbContext context = new ApplicationDbContext())
             {
