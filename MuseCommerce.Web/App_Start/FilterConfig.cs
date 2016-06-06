@@ -9,7 +9,7 @@ namespace MuseCommerce.Web
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-            filters.Add(new CheckPermissionAttribute());
+            //filters.Add(new CheckPermissionAttribute());
         }
     }
 }

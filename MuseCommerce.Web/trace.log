@@ -1,0 +1,42 @@
+----------------------------------------
+Timestamp: 2016/6/6 6:11:53
+
+Message: Timestamp: 2016/6/6 6:11:53
+Message: 登錄
+Category: 
+Priority: 1
+EventId: 0
+Severity: Information
+Title:
+Machine: WIN-C1NG2KJIDQN
+App Domain: /LM/W3SVC/2/ROOT-1-131096671089255453
+ProcessId: 24580
+Process Name: C:\Program Files\IIS Express\iisexpress.exe
+Thread Name: 
+Win32 ThreadId:27476
+Extended Properties: 
+
+Category: General
+
+Priority: -1
+
+EventId: 1
+
+Severity: Information
+
+Title:
+
+Machine: WIN-C1NG2KJIDQN
+
+App Domain: /LM/W3SVC/2/ROOT-1-131096671089255453
+
+ProcessId: 24580
+
+Process Name: C:\Program Files\IIS Express\iisexpress.exe
+
+Thread Name: 
+
+Win32 ThreadId:27476
+
+Extended Properties: 
+----------------------------------------

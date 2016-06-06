@@ -6,6 +6,7 @@ using System.Web;
 
 namespace MuseCommerce.Web
 {
+    [ExceptionPolicy("defaultPolicy")]
     public class MuseController: ExtendedController
     {
         public IList<IDisposable> DisposableObjects { get; private set; }

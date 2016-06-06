@@ -18,12 +18,12 @@ namespace MuseCommerce.Web
         protected void Application_Start()
         {
             mySource.TraceEvent(TraceEventType.Error, 1, "Error message.");
-            mySource.TraceEvent(TraceEventType.Warning, 2, "Warning message.");
-            mySource.TraceEvent(TraceEventType.Critical, 3, "Critical message.");
+            //mySource.TraceEvent(TraceEventType.Warning, 2, "Warning message.");
+            //mySource.TraceEvent(TraceEventType.Critical, 3, "Critical message.");
            
-            mySource.TraceEvent(TraceEventType.Error, 4, "Error message.");
-            mySource.TraceInformation("Informational message.");
-            mySource.TraceInformation("Informational message.");
+            //mySource.TraceEvent(TraceEventType.Error, 4, "Error message.");
+            //mySource.TraceInformation("Informational message.");
+            //mySource.TraceInformation("Informational message.");
             //mySource.Close();
 
 
@@ -53,6 +53,7 @@ namespace MuseCommerce.Web
         protected void Application_Error(Object sender, EventArgs e)
         {
             Exception exception = Server.GetLastError();
+            mySource.TraceEvent(TraceEventType.Error, 1, exception.ToString());
         }
 
         protected void Application_Exit(Object sender, EventArgs e)

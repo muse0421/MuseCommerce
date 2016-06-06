@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Practices.EnterpriseLibrary.Validation.PolicyInjection;
+using MuseCommerce.Core.InterceptionExtension;
+using MuseCommerce.Core.Log;
 using MuseCommerce.Data.Model;
 using MuseCommerce.Data.Repositories;
 using MuseCommerce.Data.Security.Identity;
@@ -16,22 +19,34 @@ namespace MuseCommerce.Web.Controllers
     public class HomeController : MuseController
     {
         // GET: Default
+
+       
         public async Task<ActionResult> Index()
         {
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new SecurityDbContext()));
             var SignInManager = HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             // HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            ApplicationUser user1 = new ApplicationUser { Id = System.Guid.NewGuid().ToString(), UserName = "xpy", Email = "muse@hot.mail" };
-            var result = await UserManager.CreateAsync(user1, "xiaohui");            
+            ApplicationUser user1 = new ApplicationUser { Id = "7ac0836a-58c3-4ba0-890c-4ff68280422e", UserName = "xpy", Email = "muse@hot.mail" };
+            //var result = await UserManager.CreateAsync(user1, "xiaohui");            
             //await SignInManager.SignInAsync(user1, isPersistent: false, rememberBrowser: false);
 
             //int zero = 0;
             //int res = 5 / zero;
 
+            EntLibLog log = new EntLibLog();
+            log.Information("登錄");
+
             var result2 = await SignInManager.PasswordSignInAsync("xpy", "xiaohui", false, shouldLockout: false);
 
-           await SignInManager.SignInAsync(user1, isPersistent: false, rememberBrowser: false);
+            try
+            {
 
+                await SignInManager.SignInAsync(user1, isPersistent: false, rememberBrowser: false);
+            }
+            catch (Exception ex)
+            {
+                var temp = ex.ToString();
+            }
 
             return View();
         }
