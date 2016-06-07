@@ -70,10 +70,8 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Da
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.csproj.GenerateResource.Cache
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.dll
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.pdb
-D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Practices.Unity.Interception.dll
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Practices.Unity.dll
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Practices.ServiceLocation.dll
-D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Practices.Unity.Interception.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Practices.Unity.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Practices.ServiceLocation.xml

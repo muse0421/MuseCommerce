@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http.Controllers;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Microsoft.Practices.Unity;
 
 namespace MuseCommerce.Core.Security
 {
@@ -80,15 +81,16 @@ namespace MuseCommerce.Core.Security
             return false;
         }
 
+        [Dependency]
+       public  ISecurityService SecurityService { set; get; }
+
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
             var isAuthorized = true;//base.IsAuthorized(actionContext);
 
             if (isAuthorized && _permissions.Length > 0)
             {
-                var securityService = new SecurityService2();
-
-                isAuthorized = IsAuthorized(securityService, IIdentity);
+                isAuthorized = IsAuthorized(SecurityService, IIdentity);
             }
 
 

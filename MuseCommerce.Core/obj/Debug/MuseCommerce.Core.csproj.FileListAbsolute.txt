@@ -38,3 +38,5 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Microsoft.Pract
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Microsoft.Practices.Unity.Interception.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml

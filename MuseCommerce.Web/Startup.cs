@@ -2,8 +2,8 @@
 using Microsoft.Owin;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
 using Microsoft.Practices.EnterpriseLibrary.Logging;
-using MuseCommerce.Web.SignalR;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(MuseCommerce.Web.Startup))]
@@ -27,6 +27,19 @@ namespace MuseCommerce.Web
             LogWriterFactory logWriterFactory = new LogWriterFactory(configurationSource);
 
             Logger.SetLogWriter(logWriterFactory.Create());
+
+            ExceptionPolicyFactory factory = new ExceptionPolicyFactory(configurationSource);
+
+            ExceptionPolicy.SetExceptionManager(factory.CreateManager());
+
+            //var platformWebBootstrapper = new PlatformWebBootstrapper();
+            //platformWebBootstrapper.Run();
+
+            //var container = platformWebBootstrapper.Container;
+
+            //container.RegisterInstance(app);
+
+            //DependencyResolver.SetResolver(new UnityDependencyResolver(container));
 
         }
     }

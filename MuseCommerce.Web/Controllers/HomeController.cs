@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Practices.EnterpriseLibrary.Validation.PolicyInjection;
-using MuseCommerce.Core.InterceptionExtension;
 using MuseCommerce.Core.Log;
 using MuseCommerce.Data.Model;
 using MuseCommerce.Data.Repositories;
@@ -19,7 +17,11 @@ namespace MuseCommerce.Web.Controllers
     public class HomeController : MuseController
     {
         // GET: Default
-
+        ILog _logging;
+        public HomeController(ILog logging)
+        {
+            _logging = logging;
+        }
        
         public async Task<ActionResult> Index()
         {
@@ -30,11 +32,8 @@ namespace MuseCommerce.Web.Controllers
             //var result = await UserManager.CreateAsync(user1, "xiaohui");            
             //await SignInManager.SignInAsync(user1, isPersistent: false, rememberBrowser: false);
 
-            //int zero = 0;
-            //int res = 5 / zero;
-
-            EntLibLog log = new EntLibLog();
-            log.Information("登錄");
+            _logging.Information("注入消息");
+           
 
             var result2 = await SignInManager.PasswordSignInAsync("xpy", "xiaohui", false, shouldLockout: false);
 
