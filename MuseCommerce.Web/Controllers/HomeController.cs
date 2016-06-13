@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using MuseCommerce.Core.Log;
 using MuseCommerce.Data.Model;
 using MuseCommerce.Data.Repositories;
 using MuseCommerce.Data.Security.Identity;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -22,34 +24,59 @@ namespace MuseCommerce.Web.Controllers
         {
             _logging = logging;
         }
+
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
        
         public async Task<ActionResult> Index()
         {
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new SecurityDbContext()));
+            var UserManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var SignInManager = HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             // HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            ApplicationUser user1 = new ApplicationUser { Id = "7ac0836a-58c3-4ba0-890c-4ff68280422e", UserName = "xpy", Email = "muse@hot.mail" };
-            //var result = await UserManager.CreateAsync(user1, "xiaohui");            
-            //await SignInManager.SignInAsync(user1, isPersistent: false, rememberBrowser: false);
 
+            //for (int i = 0; i < 10; i++)
+            //{
+
+            //    ApplicationUser user2 = new ApplicationUser { Id = Guid.NewGuid().ToString(), UserName = "xpy" + i.ToString(), Email = "muse@hot.mail" };
+            //    var result = await UserManager.CreateAsync(user2, "xiaohui");
+            //    //await SignInManager.SignInAsync(user1, isPersistent: false, rememberBrowser: false);
+            //}
             _logging.Information("注入消息");
-           
 
-            var result2 = await SignInManager.PasswordSignInAsync("xpy", "xiaohui", false, shouldLockout: false);
+            Debug.WriteLine("AuthenticationManager.User.Identity.Name in =" + AuthenticationManager.User.Identity.Name);
 
-            try
-            {
+            AuthenticationManager.SignOut();
+            Debug.WriteLine("User.Identity.Name in =" + User.Identity.Name);
 
-                await SignInManager.SignInAsync(user1, isPersistent: false, rememberBrowser: false);
-            }
-            catch (Exception ex)
-            {
-                var temp = ex.ToString();
-            }
+
+            ApplicationUser user1 = new ApplicationUser { Id = "f377a22f-6ef8-464c-a221-c3e0e3d05106", UserName = "xpy7", Email = "muse@hot.mail" };
+            var result2 = await SignInManager.PasswordSignInAsync("xpy2", "xiaohui", false, shouldLockout: false);
+
+            Debug.WriteLine("User.Identity.Name out=" + User.Identity.Name);
+
+            //try
+            //{
+
+            //    await SignInManager.SignInAsync(user1, isPersistent: false, rememberBrowser: false);
+            //}
+            //catch (Exception ex)
+            //{
+            //    var temp = ex.ToString();
+            //}
 
             return View();
         }
 
+        public ActionResult UnAuthorized()
+        {
+            return View();
+         }
+        
         public ActionResult Menu()
         {
             List<MGFunc> oDataModel=new List<MGFunc>();

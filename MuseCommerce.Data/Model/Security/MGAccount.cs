@@ -21,6 +21,21 @@ namespace MuseCommerce.Data.Model.Security
 
         public bool FIsAdministrator { set; get; }
 
+        [Required]
+        [MaxLength(100)]
+        public string FPasswordHash { set; get; }
+
+        [Required]
+        [MaxLength(100)]
+        public string FSecurityStamp { set; get; }
+
+        [MaxLength(100)]
+        public string FEmail { set; get; }
+
+        public bool FLockoutEnabled { set; get; }
+
+        public bool FTwoFactorEnabled { set; get; }
+
         [JsonConverter(typeof(StringEnumConverter))]
         public AccountType FUserType { set; get; }
 

@@ -81,3 +81,6 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Pract
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.Security.Identity.Migrations.Initial1.resources
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.Repositories.Migrations.updateACCOUNT.resources
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.Repositories.Migrations.updateACCOUNT1.resources

@@ -73,40 +73,38 @@ namespace MuseCommerce.Core.Security
 
             IIdentity = httpContext.User.Identity;
 
-            if (!httpContext.User.Identity.IsAuthenticated)
+            if (httpContext.User.Identity.IsAuthenticated)
             {
-                return false;
+                return true;
             }
 
             return false;
         }
 
         [Dependency]
-       public  ISecurityService SecurityService { set; get; }
+        public ISecurityService SecurityService { set; get; }
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            var isAuthorized = true;//base.IsAuthorized(actionContext);
+            var isAuthorized = IIdentity.IsAuthenticated;
 
             if (isAuthorized && _permissions.Length > 0)
             {
                 isAuthorized = IsAuthorized(SecurityService, IIdentity);
             }
 
-
             if (!isAuthorized)
             {
                 string path = filterContext.HttpContext.Request.Path;
                 var routeValue = new RouteValueDictionary { 
                     { "Controller", "Home"}, 
-                    { "Action", "Index"},
+                    { "Action", "UnAuthorized"},
                     { "ReturnUrl", path}
                 };
 
-                filterContext.Result = new RedirectToRouteResult(routeValue);
+                filterContext.Result = new RedirectToRouteResult("Default", routeValue);
             }
         }
-
     }
 
 

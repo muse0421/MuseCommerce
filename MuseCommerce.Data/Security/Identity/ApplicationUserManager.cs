@@ -2,8 +2,10 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using MuseCommerce.Data.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,11 +78,10 @@ namespace MuseCommerce.Data.Security.Identity
             //}
         }
 
-
-
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<SecurityDbContext>()));
+
+            var manager = new ApplicationUserManager(new ApplicationUserStore(context.Get<SecurityDbContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
@@ -124,6 +125,89 @@ namespace MuseCommerce.Data.Security.Identity
             }
             return manager;
         }
+
+        public override Task<ApplicationUser> FindByNameAsync(string userName)
+        {
+            return base.FindByNameAsync(userName);
+        }
+
+        public override Task<bool> CheckPasswordAsync(ApplicationUser user, string password)
+        {
+
+            return Task.Run<bool>(() =>
+            {
+                if (SupportsUserPassword)
+                {
+                    IUserPasswordStore<ApplicationUser, string> store2 = Store as IUserPasswordStore<ApplicationUser, string>;
+
+
+                    Debug.WriteLine("user.PasswordHash=" + user.PasswordHash.ToString());
+                    Debug.WriteLine("password=" + password.ToString());
+
+                    var newpassword1=PasswordHasher.HashPassword(password);
+                    var newpassword2=PasswordHasher.HashPassword(password);
+
+                    Debug.WriteLine("newpassword1=" + newpassword1);
+                    Debug.WriteLine("newpassword2=" + newpassword2);
+
+                    Debug.WriteLine("newpassword1 pass=" + PasswordHasher.VerifyHashedPassword(newpassword1, password).ToString());
+                    Debug.WriteLine("newpassword2 pass=" + PasswordHasher.VerifyHashedPassword(newpassword2, password).ToString());
+                    
+                    var pass = PasswordHasher.VerifyHashedPassword(user.PasswordHash, password);
+                    Debug.WriteLine("pass=" + pass.ToString());
+                    if (pass == PasswordVerificationResult.Failed)
+                    {
+                        return false;
+                    }
+                    //var hash2 = PasswordHasher.(user, password);
+
+                    //return PasswordHasher.VerifyHashedPassword(user, hash, password);
+
+                    //var result = base.VerifyPasswordAsync(Store, user, password);
+                    //if (result == PasswordVerificationResult.SuccessRehashNeeded)
+                    //{
+                    //    await UpdatePasswordHash(passwordStore, user, password, validatePassword: false);
+                    //    await UpdateUserAsync(user);
+                    //}
+
+                    //var success = result != PasswordVerificationResult.Failed;
+                    //if (!success)
+                    //{
+                    //    //Logger.LogWarning(0, "Invalid password for user {userId}.", await GetUserIdAsync(user));
+                    //}
+                    //return success;
+                    return true;
+                }
+                return true;
+            });
+
+
+            
+            //var hash = user.PasswordHash;
+            //if (hash == null)
+            //{
+            //    return false;
+            //}
+
+            
+
+            //return base.CheckPasswordAsync(user, password);
+        }
+
+        //protected override Task<bool> VerifyPasswordAsync(IUserPasswordStore<ApplicationUser, string> store, ApplicationUser user, string password)
+        //{
+        //    var newPassword = PasswordHasher.HashPassword("xiaohui");
+
+        //    //var hash = newPassword != null ? PasswordHasher.HashPassword(user, newPassword) : null;
+        //await passwordStore.SetPasswordHashAsync(user, hash, CancellationToken);
+
+        //    return base.VerifyPasswordAsync(store, user, password);
+        //}
+
+        //public override Task<System.Security.Claims.ClaimsIdentity> CreateIdentityAsync(ApplicationUser user, string authenticationType)
+        //{
+        //    return base.CreateIdentityAsync(user, authenticationType);
+        //}
     }
 
 }

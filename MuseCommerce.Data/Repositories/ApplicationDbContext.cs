@@ -51,5 +51,10 @@ namespace MuseCommerce.Data.Repositories
             modelBuilder.Configurations.Add(new MGAccountMap());
             modelBuilder.Configurations.Add(new MGRoleMap());
         }
+
+        public static ApplicationDbContext Create()
+        {
+            return new ApplicationDbContext();
+        }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using MuseCommerce.Data.Security.Identity;
+using MuseCommerce.Data.Repositories;
 
 namespace MuseCommerce.Web
 {
