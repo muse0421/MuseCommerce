@@ -1,5 +1,6 @@
 ﻿using MuseCommerce.Core.Security;
 using MuseCommerce.Data.Model.Security;
+using MuseCommerce.Data.Repositories;
 using MuseCommerce.Data.Security.Identity;
 using System;
 using System.Collections.Generic;
@@ -309,19 +310,16 @@ namespace MuseCommerce.Data.Security
                 throw new ArgumentNullException("permissionIds");
             }
 
-            //var user = FindByName(userName, UserDetails.Full);
+            var user = FindByName(userName);
 
             //var result = user != null && user.UserState == AccountState.Approved;
 
-            //if (result && user.IsAdministrator)
-            //{
-            //    return true;
-            //}
-
-            var result = false;
-
-            if (userName == "xpy")
+            if (user.FIsAdministrator)
+            {
                 return true;
+            }
+
+            bool result = false;
 
             //For managers always allow to call api
             //if (result && permissionIds.Length == 1 && permissionIds.Contains(PredefinedPermissions.SecurityCallApi)
@@ -331,14 +329,29 @@ namespace MuseCommerce.Data.Security
             //    return true;
             //}
 
-            //if (result)
-            //{
-            //    var fqUserPermissions = user.Roles.SelectMany(x => x.Permissions).SelectMany(x => x.GetPermissionWithScopeCombinationNames()).Distinct();
-            //    var fqCheckPermissions = permissionIds.Concat(permissionIds.LeftJoin(scopes, ":"));
-            //    result = fqUserPermissions.Intersect(fqCheckPermissions, StringComparer.OrdinalIgnoreCase).Any();
-            //}
+
+            var fqUserPermissions = user.FRoles
+                .SelectMany(x => x.FPermissions)
+                .ToList().Distinct();
+
+            var fqUserPermissions2 = fqUserPermissions.Select(x => x.FCode).ToList();
+
+            //var fqCheckPermissions = permissionIds.Concat(permissionIds.LeftJoin(scopes, ":"));
+            result = fqUserPermissions2.Intersect(permissionIds, StringComparer.OrdinalIgnoreCase).Any();
+
 
             return result;
+        }
+
+       
+        #endregion
+
+        private MGAccount FindByName(string userName)
+        {
+            using (ApplicationDbContext appcontext = new ApplicationDbContext())
+            {
+                return appcontext.Set<MGAccount>().Include("FRoles").Include("FRoles.FPermissions").Where(p => p.FUseName == userName).First();
+            }
         }
 
         public Permission[] GetUserPermissions(string userName)
@@ -351,22 +364,9 @@ namespace MuseCommerce.Data.Security
                 GroupName = "",
                 ModuleId = ""
             });
-            result.Add(new Permission()
-            {
-                Name = "platform:module:access",
-                Description = "platform:module:access",
-                GroupName = "",
-                ModuleId = ""
-            });
+            
             return result.ToArray();
         }
-        #endregion
-
-        //private ApplicationUserExtended FindByName(string userName, UserDetails detailsLevel)
-        //{
-        //    var user = GetApplicationUserByName(userName);
-        //    return GetUserExtended(user, detailsLevel);
-        //}
 
         //private Permission[] LoadAllPermissions()
         //{

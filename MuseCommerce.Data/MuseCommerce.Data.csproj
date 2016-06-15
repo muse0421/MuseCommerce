@@ -109,6 +109,10 @@
     <Compile Include="Repositories\Migrations\201606110308266_updateACCOUNT1.Designer.cs">
       <DependentUpon>201606110308266_updateACCOUNT1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\Migrations\201606150846080_updatepermission.cs" />
+    <Compile Include="Repositories\Migrations\201606150846080_updatepermission.Designer.cs">
+      <DependentUpon>201606150846080_updatepermission.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\Migrations\ApplicationDbConfiguration.cs" />
     <Compile Include="Security\Identity\ApplicationSignInManager.cs" />
     <Compile Include="Security\Identity\ApplicationUser.cs" />
@@ -145,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositories\Migrations\201606110308266_updateACCOUNT1.resx">
       <DependentUpon>201606110308266_updateACCOUNT1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositories\Migrations\201606150846080_updatepermission.resx">
+      <DependentUpon>201606150846080_updatepermission.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Security\Identity\Migrations\201605120647332_Initial.resx">
       <DependentUpon>201605120647332_Initial.cs</DependentUpon>

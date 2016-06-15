@@ -54,7 +54,7 @@ namespace MuseCommerce.Web.Controllers
             Debug.WriteLine("User.Identity.Name in =" + User.Identity.Name);
 
 
-            ApplicationUser user1 = new ApplicationUser { Id = "f377a22f-6ef8-464c-a221-c3e0e3d05106", UserName = "xpy7", Email = "muse@hot.mail" };
+            ApplicationUser user1 = new ApplicationUser { Id = "f377a22f-6ef8-464c-a221-c3e0e3d05106", UserName = "xpy2", Email = "muse@hot.mail" };
             var result2 = await SignInManager.PasswordSignInAsync("xpy2", "xiaohui", false, shouldLockout: false);
 
             Debug.WriteLine("User.Identity.Name out=" + User.Identity.Name);

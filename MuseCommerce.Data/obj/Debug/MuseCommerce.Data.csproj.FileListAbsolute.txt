@@ -84,3 +84,4 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\Microsoft.Pract
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.Security.Identity.Migrations.Initial1.resources
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.Repositories.Migrations.updateACCOUNT.resources
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.Repositories.Migrations.updateACCOUNT1.resources
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.Repositories.Migrations.updatepermission.resources

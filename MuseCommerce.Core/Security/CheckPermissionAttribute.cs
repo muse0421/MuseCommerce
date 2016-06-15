@@ -70,12 +70,22 @@ namespace MuseCommerce.Core.Security
             {
                 throw new ArgumentNullException("HttpContext");
             }
-
             IIdentity = httpContext.User.Identity;
-
-            if (httpContext.User.Identity.IsAuthenticated)
+            if (!httpContext.User.Identity.IsAuthenticated)
             {
-                return true;
+                return false;
+            }
+            if (_permissions==null)
+            {
+                return false;
+            }
+            if ( _permissions.Length == 0)
+            {
+                return false;               
+            }
+            if (!IsAuthorized(SecurityService, IIdentity))
+            {
+                return false;
             }
 
             return false;

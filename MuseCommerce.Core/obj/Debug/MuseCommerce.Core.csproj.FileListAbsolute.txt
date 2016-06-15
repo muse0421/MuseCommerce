@@ -40,4 +40,3 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Microsoft.Pract
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
-D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\obj\Debug\MuseCommerce.Core.csprojResolveAssemblyReference.cache

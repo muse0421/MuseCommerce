@@ -103,6 +103,8 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Common\AttributeExtensions.cs" />
+    <Compile Include="Common\StringExtensions.cs" />
+    <Compile Include="EnSecurity\EnSecurity.cs" />
     <Compile Include="Exception Handling\ExceptionPolicyAttribute.cs" />
     <Compile Include="Exception Handling\HandleErrorActionAttribute.cs" />
     <Compile Include="Log\ILog.cs" />
