@@ -2993,6 +2993,7 @@
     <Content Include="Scripts\angularjs-latest\version.json" />
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Shared\UnAuthorized.cshtml" />
+    <Content Include="Views\Shared\UserLock.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MuseCommerce.Core\MuseCommerce.Core.csproj">

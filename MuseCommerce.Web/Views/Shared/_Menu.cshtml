@@ -3,7 +3,7 @@
 @using System.Linq
 @model List<MGFunc>
 
-@{ foreach (MGFunc item in Model)
+@{ foreach (MGFunc item in Model.Where(p=>p.FParentID.IsEmpty()))
  {
     <li>
         <a href="#">
@@ -12,7 +12,7 @@
             <span class="fa arrow"></span>
         </a>
         <ul class="nav nav-second-level">
-            @{ foreach (MGFunc item2 in Model)
+            @{ foreach (MGFunc item2 in Model.Where(p=>p.FParentID==item.Id))
              {
                 <li>
                     <a class="J_menuItem" href="@item2.FUrl" data-index="0">@item2.FName.Trim()</a>

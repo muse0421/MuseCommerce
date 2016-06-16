@@ -245,14 +245,15 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
                         oTemp.FPermissions.Add(item);
                     }
                 });
-
-                oTemp.FPermissions.ForEach(item =>
+                
+                for (int i = 0; i < oTemp.FPermissions.Count; i++)
                 {
+                    var item = oTemp.FPermissions[i];
                     if (!oData.FPermissions.Exists(m => m.Id == item.Id))
                     {
                         oTemp.FPermissions.Remove(item);
                     }
-                }); 
+                };
                 
 
                 context.SaveChanges();

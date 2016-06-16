@@ -19,9 +19,14 @@
 
                     <label class="col-sm-1 control-label">類型</label>
 
-
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" ng-model="qusertype">
+                        <select class="form-control m-b" ng-model="qusertype">
+                            <option value=""></option>
+                            <option value="0">Customer</option>
+                            <option value="1">Manager</option>
+                            <option value="2">Administrator</option>
+                        </select>
+
                     </div>
                     <div class="col-sm-2">
                         <button type="button" class="btn btn-sm btn-primary" ng-click="search()"> 搜索</button>
@@ -41,13 +46,37 @@
                     <tr>                        
                         <th>名称</th>
                         <th>類型</th>
+                        <th>管理員</th>
+                        <th>E-Mail</th>
+                        <th>狀態</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="x in mgaccounts">                        
                         <td>{{ x.FUseName }}</td>
-                        <td>{{ x.FUserType }}</td>
+                        <td>
+                            <span ng-if="x.FUserType==0" class="label">
+                                Customer
+                            </span>
+                            <span ng-if="x.FUserType==1" class="label">
+                                Manager
+                            </span>
+                            <span ng-if="x.FUserType==2" class="label">
+                                Administrator
+                            </span>
+                        </td>
+                        <td>
+                            <span ng-if="x.FIsAdministrator" class="label label-primary">
+                                管理員
+                            </span>                        
+                        </td>
+                        <td>{{ x.FEmail }}</td>
+                        <td>                            
+                            <span ng-if="!x.FLockoutEnabled" class="label label-warning">
+                                停用
+                            </span>
+                        </td>
                         <td class="project-actions">
                             <a ui-sref="display({ID:'{{ x.Id }}'})" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看 </a>
                             <a ui-sref="setting({ID:'{{ x.Id }}'})" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 設置角色 </a>

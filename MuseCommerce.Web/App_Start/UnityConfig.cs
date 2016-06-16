@@ -43,6 +43,8 @@ namespace MuseCommerce.Web.App_Start
 
             container.RegisterType<ISecurityService, SecurityService>();
             container.RegisterType<ILog, EntLibLog>();
+            container.RegisterType<ILog, EntLibLog>();
+            container.RegisterType<ILog, EntLibLog>();
         }
     }
 }

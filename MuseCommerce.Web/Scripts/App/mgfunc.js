@@ -3,7 +3,37 @@ var app = angular.module('mgfuncApp', AppDependencies);
 app.controller('mgfuncCtrl', function ($scope, $http) {
     
    
-}).config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+}).config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
+
+    $httpProvider.interceptors.push(['$rootScope', '$q', '$location', '$timeout',
+        function ($rootScope, $q, $location, $timeout) {
+            return {
+                'request': function (config) {
+                    //处理AJAX请求（否则后台IsAjaxRequest()始终false）
+                    config.headers['X-Requested-With'] = 'XMLHttpRequest';
+                    return config || $q.when(config);
+                },
+                'requestError': function (rejection) {
+                    return rejection;
+                },
+                'response': function (response) {
+                    return response || $q.when(response);
+                },
+                'responseError': function (response) {
+                    console.log('responseError:' + response);
+                    if (response.status === 401 || response.status === 403) {
+                        abp.notify.error("会话超时，请重新登录！");
+                        $timeout(function () { window.location = "/Login"; }, 3000);
+                        return false;
+                    }
+                    else if (response.status === 500) {
+                        $location.path('/error');
+                        return false;
+                    }
+                    return $q.reject(response);
+                }
+            };
+        }]);
 
     $stateProvider
         .state('index', {

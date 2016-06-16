@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Diagnostics;
 using MuseCommerce.Data.Model.Security;
 using MuseCommerce.Web.SignalR;
+using MuseCommerce.Core.EnSecurity;
 
 namespace MuseCommerce.Web.Areas.Manage.Controllers
 {
@@ -19,7 +20,7 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
             return View();
         }
 
-        public JsonResult MGAccountInfo(string qname)
+        public JsonResult MGAccountInfo(string qname, string qusertype)
         {
             var jsAjax = Request.IsAjaxRequest();
 
@@ -37,6 +38,11 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
                 if (!string.IsNullOrEmpty(qname))
                 {
                     Temp = Temp.Where(p => p.FUseName.StartsWith(qname));
+                }
+                if (!string.IsNullOrEmpty(qusertype))
+                {
+                    var AccountType = (AccountType)Convert.ToInt32(qusertype);
+                    Temp = Temp.Where(p => p.FUserType == AccountType);
                 }
                 var oData = Temp.ToList();
 
@@ -117,6 +123,8 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
 
                 var oTemp = context.Set<MGAccount>().Where(p => p.Id == oData.Id).First();
                 oTemp.FUseName = oData.FUseName;
+                oTemp.FIsAdministrator = oData.FIsAdministrator;
+                oTemp.FEmail = oData.FEmail;
                 oTemp.FUserType = oData.FUserType;
 
                 oTemp.ModifiedBy = User.Identity.Name;
@@ -141,19 +149,25 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
             JsonResult json = new JsonResult() { };
             json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
 
-            using (ApplicationDbContext context = new ApplicationDbContext())
+            try
             {
-                context.Configuration.ProxyCreationEnabled = false;
-                oData.Id = Guid.NewGuid().ToString();
-                oData.CreatedBy = User.Identity.Name;
-                oData.CreatedDate = DateTime.Now;
+                using (ApplicationDbContext context = new ApplicationDbContext())
+                {
+                    context.Configuration.ProxyCreationEnabled = false;
+                    oData.Id = Guid.NewGuid().ToString();
 
-                context.Set<MGAccount>().Add(oData);
+                    oData.FPasswordHash = EnSecurity.GetMD5_32(oData.FPasswordHash);
+                    oData.FSecurityStamp = Guid.NewGuid().ToString();
+                    oData.CreatedBy = User.Identity.Name;
+                    oData.CreatedDate = DateTime.Now;
 
-                
-                context.SaveChanges();
-
-
+                    context.Set<MGAccount>().Add(oData);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                var temp = ex.ToString();
             }
 
 
@@ -227,13 +241,14 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
                     }
                 });
 
-                oTemp.FRoles.ForEach(item =>
+                for (int i = 0; i < oTemp.FRoles.Count; i++)
                 {
+                    var item = oTemp.FRoles[i];
                     if (!oData.FRoles.Exists(m => m.Id == item.Id))
                     {
                         oTemp.FRoles.Remove(item);
                     }
-                });
+                };
 
 
                 context.SaveChanges();

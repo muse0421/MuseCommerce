@@ -137,12 +137,10 @@ namespace MuseCommerce.Data.Security.Identity
 
             return Task.Run<bool>(() =>
             {
-
-                Debug.WriteLine("newpassword1=" + EnSecurity.GetMD5_32("xiaohui"));
-                Debug.WriteLine("newpassword2=" + EnSecurity.GetMD5_32(password));
-
                 var pass = EnSecurity.GetMD5_32(password);
-                Debug.WriteLine("pass=" + pass.ToString());
+                Debug.WriteLine("password=" + pass.ToString());
+                Debug.WriteLine("user.PasswordHash=" + user.PasswordHash.ToString());
+                Debug.WriteLine("pass == user.PasswordHash=" + (pass == user.PasswordHash).ToString());
                 if (pass == user.PasswordHash)
                 {
                     return true;
