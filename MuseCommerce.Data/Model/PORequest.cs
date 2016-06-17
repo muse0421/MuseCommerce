@@ -1,4 +1,6 @@
 ﻿using MuseCommerce.Core.Common;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,15 +24,20 @@ namespace MuseCommerce.Data.Model
 
         public DateTime FDate { set; get; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         public POTranType FTranType { set; get; }
 
-        [MaxLength(100)]
+        [MaxLength(10)]
         public string FStatus { set; get; }
 
         [MaxLength(200)]
         public string FNote { set; get; }
 
         public Address PoAddress { set; get; }
+
+        public bool FForbidden { set; get; }
+
+        public bool FDeleted { get; set; }
                
         public virtual List<PORequestEntry> PORequestEntrys { set; get; }
     }
@@ -44,6 +51,7 @@ namespace MuseCommerce.Data.Model
         [MaxLength(200)]
         public string StreetName { get; set; }
     }
+
     public class PORequestEntry : AuditableEntity
     {
         [MaxLength(100)]

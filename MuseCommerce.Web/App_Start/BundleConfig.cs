@@ -40,9 +40,8 @@ namespace MuseCommerce.Web
                         "~/Scripts/welcome.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/DataTables").Include(
-                       "~/Scripts/plugins/bootstrap-table/bootstrap-table.min.js",
-                       "~/Scripts/plugins/bootstrap-table/bootstrap-table-mobile.min.js",
-                       "~/Scripts/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"));
+                       "~/Scripts/plugins/dataTables/jquery.dataTables.js",
+                       "~/Scripts/plugins/dataTables/dataTables.bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
                                     "~/Scripts/bootstrap-datepicker.js"));
@@ -77,6 +76,9 @@ namespace MuseCommerce.Web
                      "~/Scripts/App/mgaccount.js"));
             bundles.Add(new ScriptBundle("~/bundles/mgpermissionapp").Include(
                      "~/Scripts/App/mgpermission.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/mgitemapp").Include(
+                    "~/Scripts/App/mgitem.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/porequestapp").Include(
                        "~/Scripts/App/porequest.js"));

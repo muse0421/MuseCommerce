@@ -237,10 +237,11 @@
     <Compile Include="Areas\Manage\Controllers\MGPermissionController.cs" />
     <Compile Include="Areas\Manage\Controllers\MGRoleController.cs" />
     <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
+    <Compile Include="Areas\MGCode\Controllers\ItemController.cs" />
+    <Compile Include="Areas\MGCode\MGCodeAreaRegistration.cs" />
     <Compile Include="Areas\Order\Controllers\PORequestController.cs" />
     <Compile Include="Areas\Order\OrderAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2554,9 +2555,14 @@
     <Content Include="Scripts\angularjs-latest\version.txt" />
     <Content Include="Scripts\App\mgaccount.js" />
     <Content Include="Scripts\App\mgpermission.js" />
+    <Content Include="Scripts\App\mgitem.js" />
     <Content Include="Scripts\App\mgrole.js" />
     <Content Include="Scripts\App\porequest.js" />
     <Content Include="Scripts\App\mgfunc.js" />
+    <Content Include="Scripts\App\tpls\mgitem\create.tpl.html" />
+    <Content Include="Scripts\App\tpls\mgitem\display.tpl.html" />
+    <Content Include="Scripts\App\tpls\mgitem\edit.tpl.html" />
+    <Content Include="Scripts\App\tpls\mgitem\index.tpl.html" />
     <Content Include="Scripts\App\tpls\mgpermission\create.tpl.html" />
     <Content Include="Scripts\App\tpls\mgpermission\display.tpl.html" />
     <Content Include="Scripts\App\tpls\mgpermission\edit.tpl.html" />
@@ -2719,6 +2725,8 @@
     <Folder Include="Areas\Manage\Controllers\Api\" />
     <Folder Include="Areas\Manage\Models\" />
     <Folder Include="Areas\Manage\Views\Shared\" />
+    <Folder Include="Areas\MGCode\Models\" />
+    <Folder Include="Areas\MGCode\Views\Shared\" />
     <Folder Include="Areas\Order\Models\" />
     <Folder Include="Areas\Order\Views\Shared\" />
     <Folder Include="Models\" />
@@ -2755,6 +2763,8 @@
     <Content Include="Areas\Manage\Views\MGAccount\Index.cshtml" />
     <Content Include="Areas\Manage\Views\MGPermission\Index.cshtml" />
     <Content Include="Areas\Manage\Views\MGRole\Index.cshtml" />
+    <Content Include="Areas\MGCode\Views\web.config" />
+    <Content Include="Areas\MGCode\Views\Item\Index.cshtml" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_NoticeMessage.cshtml" />
@@ -2763,7 +2773,6 @@
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Logout.cshtml" />
-    <Content Include="Views\Manage\Func.cshtml" />
     <Content Include="Views\Shared\_RightSideBar.cshtml" />
     <Content Include="Scripts\angularjs-latest\angular-animate.min.js.map" />
     <Content Include="Scripts\angularjs-latest\angular-aria.min.js.map" />

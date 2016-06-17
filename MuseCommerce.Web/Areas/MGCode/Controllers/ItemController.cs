@@ -5,53 +5,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Diagnostics;
-using MuseCommerce.Data.Model.Security;
-using MuseCommerce.Web.SignalR;
 
-namespace MuseCommerce.Web.Areas.Manage.Controllers
+namespace MuseCommerce.Web.Areas.MGCode.Controllers
 {
-    public class MGPermissionController : MuseController
+    public class ItemController : Controller
     {
-        // GET: Manage/MGPermission
+        // GET: MGCode/Item
         public ActionResult Index()
         {
             return View();
         }
 
-        public JsonResult MGPermissionInfo(string qname)
-        {
-            JsonResult json = new JsonResult() { };
-            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
 
+        public JsonResult ItemCoreInfo(string qnumber, string qname, int start, int length)
+        {
             int total = 0;
 
             using (ApplicationDbContext context = new ApplicationDbContext())
             {
                 context.Configuration.ProxyCreationEnabled = false;
-                IQueryable<MGPermission> Temp = context.Set<MGPermission>();
-               
+                IQueryable<ItemCore> Temp = context.Set<ItemCore>();
+
+                if (!string.IsNullOrEmpty(qnumber))
+                {
+                    Temp = Temp.Where(p => p.FNumber.StartsWith(qnumber));
+                }
                 if (!string.IsNullOrEmpty(qname))
                 {
                     Temp = Temp.Where(p => p.FName.StartsWith(qname));
                 }
 
                 total = Temp.Count();
-                var oData = Temp.ToList();
 
+                Temp = Temp.OrderBy(p => p.FNumber).Skip(start).Take(length);
+
+                var oData = Temp.ToList();
+                
                 var items = new
                 {
+                    draw=1,
+                    start = start,
                     recordsTotal = total,
+                    recordsFiltered = total,
                     data = oData
                 };
 
-                json.Data = items;
-
-                return json;
+                return Json(items, JsonRequestBehavior.AllowGet);
             }
         }
 
-        public JsonResult MGPermission(string id)
+        public JsonResult ItemCore(string id)
         {
             JsonResult json = new JsonResult() { };
             json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
@@ -59,7 +62,7 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
             using (ApplicationDbContext context = new ApplicationDbContext())
             {
                 context.Configuration.ProxyCreationEnabled = false;
-                IQueryable<MGPermission> Temp = context.Set<MGPermission>();
+                IQueryable<ItemCore> Temp = context.Set<ItemCore>();
 
 
                 if (!string.IsNullOrEmpty(id))
@@ -80,7 +83,7 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
         }
 
         [HttpPut]
-        public JsonResult PutMGPermission(MGPermission oData)
+        public JsonResult PutItemCore(ItemCore oData)
         {
             JsonResult json = new JsonResult() { };
             json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
@@ -89,13 +92,12 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
             {
                 context.Configuration.ProxyCreationEnabled = false;
 
-                var oTemp = context.Set<MGPermission>().Where(p => p.Id == oData.Id).First();
+                var oTemp = context.Set<ItemCore>().Where(p => p.Id == oData.Id).First();
                 oTemp.FName = oData.FName;
-                oTemp.FDescription = oData.FDescription;
-                oTemp.FCode = oData.FCode;
-
-                oTemp.ModifiedBy = User.Identity.Name;
-                oTemp.ModifiedDate = DateTime.Now;
+                oTemp.FHelpCode = oData.FHelpCode;
+                oTemp.FModel = oData.FModel;
+                oTemp.FNumber = oData.FNumber;
+                oTemp.FShortNumber = oData.FShortNumber;                               
 
                 context.SaveChanges();
 
@@ -111,73 +113,32 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveMGPermission(MGPermission oData)
+        public JsonResult SaveItemCore(ItemCore oData)
         {
             JsonResult json = new JsonResult() { };
             json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-            try
+
+            using (ApplicationDbContext context = new ApplicationDbContext())
             {
-                using (ApplicationDbContext context = new ApplicationDbContext())
+                context.Configuration.ProxyCreationEnabled = false;
+                oData.Id = Guid.NewGuid().ToString();
+
+                oData.CreatedBy = User.Identity.Name;
+                oData.CreatedDate = DateTime.Now;
+
+                context.Set<ItemCore>().Add(oData);
+
+                context.SaveChanges();
+
+                var items = new
                 {
-                    context.Configuration.ProxyCreationEnabled = false;
-                    oData.Id = Guid.NewGuid().ToString();
-                    oData.CreatedBy = User.Identity.Name;
-                    oData.CreatedDate = DateTime.Now;
+                    success = true
+                };
 
-                    context.Set<MGPermission>().Add(oData);
+                json.Data = items;
 
-                    context.SaveChanges();
-
-
-                }
+                return json;
             }
-            catch (Exception EX)
-            {
-                MvcApplication.mySource.TraceEvent(TraceEventType.Error, 3, EX.ToString());
-            }
-
-            NoticeMessageSubSystem.SendMessage("新增權限:" + oData.FName);
-
-            var items = new
-            {
-                success = true
-            };
-
-            json.Data = items;
-
-            return json;
-        }
-
-        [HttpDelete]
-        public JsonResult DeleteMGPermission(string FID)
-        {
-            JsonResult json = new JsonResult() { };
-            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-            try
-            {
-                using (ApplicationDbContext context = new ApplicationDbContext())
-                {
-                    var oTemp = context.Set<MGPermission>().Where(p => p.Id == FID).First();
-
-                    context.MGPermission.Remove(oTemp);
-
-                    context.SaveChanges();
-
-                }
-            }
-            catch (Exception EX)
-            {
-                MvcApplication.mySource.TraceEvent(TraceEventType.Error, 3, EX.ToString());
-            }
-
-            var items = new
-            {
-                success = true
-            };
-
-            json.Data = items;
-
-            return json;
         }
 
         [HttpPut]
@@ -190,7 +151,7 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
             {
                 context.Configuration.ProxyCreationEnabled = false;
 
-                var oTemp = context.Set<MGPermission>().Where(p => p.Id == FID).First();
+                var oTemp = context.Set<ItemCore>().Where(p => p.Id == FID).First();
                 oTemp.FForbidden = true;
 
                 oTemp.ModifiedBy = User.Identity.Name;
@@ -219,7 +180,7 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
             {
                 context.Configuration.ProxyCreationEnabled = false;
 
-                var oTemp = context.Set<MGPermission>().Where(p => p.Id == FID).First();
+                var oTemp = context.Set<ItemCore>().Where(p => p.Id == FID).First();
                 oTemp.FForbidden = false;
 
                 oTemp.ModifiedBy = User.Identity.Name;
@@ -237,6 +198,5 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
                 return json;
             }
         }
-
     }
 }

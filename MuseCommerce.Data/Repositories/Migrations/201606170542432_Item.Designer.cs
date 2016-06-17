@@ -7,13 +7,13 @@ namespace MuseCommerce.Data.Repositories.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class FForbidden : IMigrationMetadata
+    public sealed partial class Item : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(FForbidden));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Item));
         
         string IMigrationMetadata.Id
         {
-            get { return "201606170110232_FForbidden"; }
+            get { return "201606170542432_Item"; }
         }
         
         string IMigrationMetadata.Source

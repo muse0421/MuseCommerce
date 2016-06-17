@@ -16,7 +16,7 @@ namespace MuseCommerce.Data.Repositories
          Enable-Migrations -ContextTypeName MuseCommerce.Data.Repositories.ApplicationDbContext -MigrationsDirectory Repositories\Migrations
          * 
          add-migration Initial -ConfigurationTypeName ApplicationDbConfiguration
-         add-migration FForbidden -ConfigurationTypeName ApplicationDbConfiguration
+         add-migration Item -ConfigurationTypeName ApplicationDbConfiguration
          * 
          Update-DataBase -ConfigurationTypeName ApplicationDbConfiguration
         **/

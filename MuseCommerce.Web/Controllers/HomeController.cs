@@ -177,7 +177,7 @@ namespace MuseCommerce.Web.Controllers
                 }
 
             }
-            return PartialView("_Menu", oDataModel);
+            return PartialView("_Menu", oDataModel.OrderBy(x=>x.FPriority).ToList());
         }
 
         public ActionResult Dashboard()

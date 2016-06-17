@@ -34,7 +34,7 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
                 context.Configuration.ProxyCreationEnabled = false;
                 IQueryable<MGAccount> Temp = context.Set<MGAccount>();
 
-                total = Temp.Count();
+               
                 if (!string.IsNullOrEmpty(qname))
                 {
                     Temp = Temp.Where(p => p.FUseName.StartsWith(qname));
@@ -43,7 +43,9 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
                 {
                     var AccountType = (AccountType)Convert.ToInt32(qusertype);
                     Temp = Temp.Where(p => p.FUserType == AccountType);
-                }
+                } 
+                
+                total = Temp.Count();
                 var oData = Temp.ToList();
 
                 var items = new

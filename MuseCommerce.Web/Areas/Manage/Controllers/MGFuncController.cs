@@ -25,8 +25,7 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
             {
                 context.Configuration.ProxyCreationEnabled = false;
                 IQueryable<MGFunc> Temp = context.Set<MGFunc>().Include("MGPermission");
-
-                total = Temp.Count();
+               
                 if (!string.IsNullOrEmpty(qname))
                 {
                     Temp = Temp.Where(p => p.FName.StartsWith(qname));
@@ -37,6 +36,7 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
                 }
                 var oData = Temp.ToList();
 
+                total = Temp.Count();
                 var items = new
                 {                    
                     recordsTotal = total,                    

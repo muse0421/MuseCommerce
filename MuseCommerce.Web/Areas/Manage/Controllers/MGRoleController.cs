@@ -44,12 +44,12 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
             {
                 context.Configuration.ProxyCreationEnabled = false;
                 IQueryable<MGRole> Temp = context.Set<MGRole>();
-
-                total = Temp.Count();
+               
                 if (!string.IsNullOrEmpty(qname))
                 {
                     Temp = Temp.Where(p => p.FName.StartsWith(qname));
                 }
+                total = Temp.Count();
                 var oData = Temp.ToList();
 
                 var items = new

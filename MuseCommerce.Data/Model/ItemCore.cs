@@ -18,6 +18,9 @@ namespace MuseCommerce.Data.Model
         public string FName { get; set; }
         [MaxLength(100)]
         public string FModel { get; set; }
-        public Nullable<short> FDeleted { get; set; }
+
+        public bool FForbidden { set; get; } 
+
+        public bool FDeleted { get; set; }
     }
 }

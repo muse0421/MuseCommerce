@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section styles {
+    @Styles.Render("~/Content/DataTables")
+}
+
+
+
+<div class="row" ng-app="mgitemApp" ng-controller="mgitemCtrl">
+    <div ui-view></div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/DataTables")
+
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/angularui")
+    @Scripts.Render("~/bundles/mgitemapp")
+}
