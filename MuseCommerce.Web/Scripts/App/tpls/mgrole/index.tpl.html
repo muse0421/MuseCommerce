@@ -16,13 +16,6 @@
                     <div class="col-sm-2">
                         <input type="text" class="form-control" ng-model="qname">
                     </div>
-
-                    <label class="col-sm-1 control-label">描述</label>
-
-
-                    <div class="col-sm-2">
-                        <input type="text" class="form-control" ng-model="qdescription">
-                    </div>
                     <div class="col-sm-2">
                         <button type="button" class="btn btn-sm btn-primary" ng-click="search()"> 搜索</button>
                     </div>
@@ -38,21 +31,36 @@
 
             <table class="table table-hover">
                 <thead>
-                    <tr>                        
+                    <tr>
                         <th>名称</th>
                         <th>描述</th>
+                        <th>狀態</th>
+                        <th></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="x in mgroles">                        
+                    <tr ng-repeat="x in mgroles">
                         <td>{{ x.FName }}</td>
                         <td>{{ x.FDescription }}</td>
+                        <td>
+                            <span ng-if="x.FForbidden" class="label label-warning ">
+                                禁用
+                            </span>
+                            <span ng-if="!x.FForbidden" class="label label-info">
+                                可用
+                            </span>
+                        </td>
+                        <td class="project-actions">
+                            <a data-ng-click="forbidden(x.Id)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 禁用 </a>
+                            <a data-ng-click="restore(x.Id)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 恢復 </a>
+                        </td>
                         <td class="project-actions">
                             <a ui-sref="display({ID:'{{ x.Id }}'})" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看 </a>
+
                             <a ui-sref="setting({ID:'{{ x.Id }}'})" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 設置權限 </a>
                             <a ui-sref="edit({ID:'{{ x.Id }}'})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 编辑 </a>
-                            <a data-ng-click="delete(x.Id)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 删除 </a>
+                            <a data-ng-click="delete(x.Id)" class="btn btn-danger btn-sm"><i class="fa fa-pencil"></i> 删除 </a>
                         </td>
                     </tr>
                 </tbody>

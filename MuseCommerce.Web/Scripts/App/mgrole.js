@@ -106,19 +106,34 @@ app.controller('IndexmgroleCtrl', function ($scope, $http, $state, $stateParams)
             $http.delete("/Manage/mgrole/DeleteMGRole", config)
             .success(function (response) {
                 $scope.success = response.success;
-                console.log('save');
-                console.log($scope.success);
 
                 $scope.search();
 
                 swal("删除成功！", "您已经永久删除了这条信息。", "success");
             });
         });
-        return;
-
-
+        
 
         console.log('search');
+    };
+
+    $scope.forbidden = function (fid) { 
+        var data = { 'fid': fid };
+        $http.put("/Manage/mgrole/forbidden",data)
+           .success(function (response) {
+               $scope.success = response.success;
+               $scope.search();
+        });
+    };
+    
+    $scope.restore = function (fid) {       
+        var data = { 'fid': fid };
+        $http.put("/Manage/mgrole/restore", data)
+           .success(function (response) {
+               $scope.success = response.success;
+
+               $scope.search();
+           });
     };
 
     $scope.search();
@@ -200,7 +215,7 @@ app.controller('SettingmgroleCtrl', function ($scope, $http, $state, $stateParam
             console.log(response.data);
 
 
-            $http.get("/Manage/mgpermission/mgpermissionInfo", config)
+           $http.get("/Manage/mgpermission/mgpermissionInfo", config)
           .success(function (response) {
 
               angular.forEach(response.data, function (item) {

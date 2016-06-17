@@ -14,6 +14,8 @@ namespace MuseCommerce.Data.Model.Security
         [Required]
         public string FDescription { set; get; }
 
+        public bool FForbidden { set; get; } 
+
         // MGRolePermission
         public virtual List<MGPermission>  FPermissions { get; set; }
                 

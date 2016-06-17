@@ -115,6 +115,28 @@ app.controller('IndexmgpermissionCtrl', function ($scope, $http, $state, $stateP
         console.log('search');
     };
 
+    $scope.forbidden = function (fid) {
+        var data = { 'fid': fid };
+
+        $http.put("/Manage/mgpermission/forbidden", data)
+           .success(function (response) {
+               $scope.success = response.success;
+
+               $scope.search();
+           });
+    };
+
+    $scope.restore = function (fid) {
+        var data = { 'fid': fid };
+
+        $http.put("/Manage/mgpermission/restore", data)
+           .success(function (response) {
+               $scope.success = response.success;
+
+               $scope.search();
+           });
+    };
+
     $scope.search();
 
 });

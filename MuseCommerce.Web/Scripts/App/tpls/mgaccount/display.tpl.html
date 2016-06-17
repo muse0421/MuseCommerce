@@ -26,16 +26,21 @@
                                 <span ng-if="mgaccount.FUserType==2" class="label">
                                     Administrator
                                 </span>
-
                             </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
                             <dt>管理員:</dt>
                             <dd>
                                 <span ng-if="mgaccount.FIsAdministrator" class="label label-primary">
                                     管理員
                                 </span>
                             </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
                             <dt>E-Mail:</dt>
                             <dd>{{ mgaccount.FEmail }}</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
                             <dt>狀態:</dt>
                             <dd>
                                 <span ng-if="!mgaccount.FLockoutEnabled" class="label label-warning">

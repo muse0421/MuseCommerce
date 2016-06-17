@@ -17,8 +17,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace MuseCommerce.Web.Controllers
-{
-    [Authorize]
+{    
     public class HomeController : MuseController
     {
 
@@ -185,7 +184,6 @@ namespace MuseCommerce.Web.Controllers
         {
             return View();
         }
-
 
         public ActionResult NotFound()
         {

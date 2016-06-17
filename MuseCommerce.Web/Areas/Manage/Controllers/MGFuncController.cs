@@ -19,15 +19,12 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
 
         public JsonResult MGFuncInfo(string qname,string qurl)
         {
-            JsonResult json = new JsonResult() { };
-            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-
             int total = 0;
 
             using (ApplicationDbContext context = new ApplicationDbContext())
             {
                 context.Configuration.ProxyCreationEnabled = false;
-                IQueryable<MGFunc> Temp = context.Set<MGFunc>();
+                IQueryable<MGFunc> Temp = context.Set<MGFunc>().Include("MGPermission");
 
                 total = Temp.Count();
                 if (!string.IsNullOrEmpty(qname))
@@ -46,9 +43,7 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
                     data = oData
                 };
 
-                json.Data = items;
-
-                return json;
+                return Json(items, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -135,5 +130,64 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
                 return json;
             }
         }
+
+        [HttpPut]
+        public JsonResult Forbidden(string FID)
+        {
+            JsonResult json = new JsonResult() { };
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                context.Configuration.ProxyCreationEnabled = false;
+
+                var oTemp = context.Set<MGFunc>().Where(p => p.Id == FID).First();
+                oTemp.IsActive = false;
+
+                oTemp.ModifiedBy = User.Identity.Name;
+                oTemp.ModifiedDate = DateTime.Now;
+
+                context.SaveChanges();
+
+                var items = new
+                {
+                    success = true
+                };
+
+                json.Data = items;
+
+                return json;
+            }
+        }
+
+        [HttpPut]
+        public JsonResult Restore(string FID)
+        {
+            JsonResult json = new JsonResult() { };
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                context.Configuration.ProxyCreationEnabled = false;
+
+                var oTemp = context.Set<MGFunc>().Where(p => p.Id == FID).First();
+                oTemp.IsActive = true;
+
+                oTemp.ModifiedBy = User.Identity.Name;
+                oTemp.ModifiedDate = DateTime.Now;
+
+                context.SaveChanges();
+
+                var items = new
+                {
+                    success = true
+                };
+
+                json.Data = items;
+
+                return json;
+            }
+        }
+
     }
 }

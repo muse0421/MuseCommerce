@@ -1,8 +1,8 @@
 ﻿var AppDependencies = ['ui.router', 'ngAnimate'];
 var app = angular.module('mgfuncApp', AppDependencies);
 app.controller('mgfuncCtrl', function ($scope, $http) {
-    
-   
+
+
 }).config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
     $httpProvider.interceptors.push(['$rootScope', '$q', '$location', '$timeout',
@@ -60,17 +60,17 @@ app.controller('mgfuncCtrl', function ($scope, $http) {
             }
         });
 
-        $urlRouterProvider.otherwise('/index');
+    $urlRouterProvider.otherwise('/index');
 }])
 .run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
-    
+
 }]);
 
 
 app.controller('IndexMGFuncCtrl', function ($scope, $http, $state, $stateParams) {
-   
+
     $scope.qname = "";
     $scope.qurl = "";
 
@@ -80,6 +80,24 @@ app.controller('IndexMGFuncCtrl', function ($scope, $http, $state, $stateParams)
         .success(function (response) { $scope.mgfuncs = response.data; });
 
         console.log('search');
+    };
+    $scope.forbidden = function (fid) {
+        var data = { 'fid': fid };
+        $http.put("/Manage/MGFunc/forbidden", data)
+           .success(function (response) {
+               $scope.success = response.success;
+               $scope.search();
+           });
+    };
+
+    $scope.restore = function (fid) {
+        var data = { 'fid': fid };
+        $http.put("/Manage/MGFunc/restore", data)
+           .success(function (response) {
+               $scope.success = response.success;
+
+               $scope.search();
+           });
     };
 
     $scope.search();
@@ -93,8 +111,20 @@ app.controller('EditMGFuncCtrl', function ($scope, $http, $state, $stateParams) 
 
     $scope.loadmgfunc = function () {
         var config = { params: { 'ID': $stateParams.ID } };
-        $http.get("/Manage/MGFunc/MGFunc", config)
-        .success(function (response) { $scope.mgfunc = response.data; });
+
+
+        $http.get("/Manage/mgpermission/mgpermissionInfo", config)
+       .success(function (response2) {
+
+           $scope.mgpermissionInfo = response2.data;
+           console.log(response2.data);
+
+            $http.get("/Manage/MGFunc/MGFunc", config)
+            .success(function (response) {
+                $scope.mgfunc = response.data;
+            });
+
+       });
 
     };
 
@@ -126,13 +156,20 @@ app.controller('DisplayMGFuncCtrl', function ($scope, $http, $state, $stateParam
 });
 
 app.controller('CreateMGFuncCtrl', function ($scope, $http, $state, $stateParams) {
-    $scope.mgfunc = { 'Id': "", "FName": "", "FUrl": "" };
     
+    var config = { params: { 'qname': '' } };
     
+    $http.get("/Manage/mgpermission/mgpermissionInfo", config)
+      .success(function (response2) {
+          $scope.mgpermissionInfo = response2.data;
+          $scope.mgfunc = { 'Id': "", "FName": "", "FUrl": "", "FPermissionID": "", "FPriority": 0 };
+          
+      });
+
     $scope.save = function () {
 
         console.log('save');
-       
+
         var config = {};
         var data = $scope.mgfunc;
         $http.post("/Manage/MGFunc/SaveMGFunc", data, config)
@@ -140,7 +177,7 @@ app.controller('CreateMGFuncCtrl', function ($scope, $http, $state, $stateParams
             $scope.success = response.success;
             console.log('save');
             console.log($scope.success);
-        });       
+        });
     };
 
 });

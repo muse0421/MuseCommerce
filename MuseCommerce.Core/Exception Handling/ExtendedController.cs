@@ -43,7 +43,12 @@ namespace MuseCommerce.Core.Exception_Handling
             //对于Ajax请求，直接返回一个用于封装异常的JsonResult
             if (Request.IsAjaxRequest())
             {
-                filterContext.Result = Json(new ExceptionDetail(exceptionToThrow, errorMessage),JsonRequestBehavior.AllowGet);
+                var errormesg = new
+                {
+                    success = false,
+                    message=new ExceptionDetail(exceptionToThrow, errorMessage)
+                };
+                filterContext.Result = Json(errormesg, JsonRequestBehavior.AllowGet);
                 return;
             }
 

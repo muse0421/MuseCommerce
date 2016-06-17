@@ -6,17 +6,28 @@
                     <div class="col-sm-12">
                         <div class="m-b-md">
                             <a ui-sref="index" class="btn btn-white btn-xs pull-right">返回</a>
-                            <a ui-sref="edit({ID:'{{mgroleid}}'})" class="btn btn-primary btn-xs pull-right">编辑</a>                           
+                            <a ui-sref="edit({ID:'{{mgroleid}}'})" class="btn btn-primary btn-xs pull-right">编辑</a>
                             <h2>{{mgrole.FName}}</h2>
                         </div>
-                       
+
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-8">
-                        <dl class="dl-horizontal">                            
+                        <dl class="dl-horizontal">
                             <dt>描述:</dt>
                             <dd>{{mgrole.FDescription}}</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>狀態:</dt>
+                            <dd>
+                                <span ng-if="x.FForbidden" class="label label-warning ">
+                                    禁用
+                                </span>
+                                <span ng-if="!x.FForbidden" class="label label-info">
+                                    可用
+                                </span>
+                            </dd>
                         </dl>
                     </div>
                 </div>

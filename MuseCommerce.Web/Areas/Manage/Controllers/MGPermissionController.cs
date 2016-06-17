@@ -91,6 +91,7 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
                 var oTemp = context.Set<MGPermission>().Where(p => p.Id == oData.Id).First();
                 oTemp.FName = oData.FName;
                 oTemp.FDescription = oData.FDescription;
+                oTemp.FCode = oData.FCode;
 
                 oTemp.ModifiedBy = User.Identity.Name;
                 oTemp.ModifiedDate = DateTime.Now;
@@ -177,5 +178,64 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
 
             return json;
         }
+
+        [HttpPut]
+        public JsonResult Forbidden(string FID)
+        {
+            JsonResult json = new JsonResult() { };
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                context.Configuration.ProxyCreationEnabled = false;
+
+                var oTemp = context.Set<MGPermission>().Where(p => p.Id == FID).First();
+                oTemp.FForbidden = true;
+
+                oTemp.ModifiedBy = User.Identity.Name;
+                oTemp.ModifiedDate = DateTime.Now;
+
+                context.SaveChanges();
+
+                var items = new
+                {
+                    success = true
+                };
+
+                json.Data = items;
+
+                return json;
+            }
+        }
+
+        [HttpPut]
+        public JsonResult Restore(string FID)
+        {
+            JsonResult json = new JsonResult() { };
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                context.Configuration.ProxyCreationEnabled = false;
+
+                var oTemp = context.Set<MGPermission>().Where(p => p.Id == FID).First();
+                oTemp.FForbidden = false;
+
+                oTemp.ModifiedBy = User.Identity.Name;
+                oTemp.ModifiedDate = DateTime.Now;
+
+                context.SaveChanges();
+
+                var items = new
+                {
+                    success = true
+                };
+
+                json.Data = items;
+
+                return json;
+            }
+        }
+
     }
 }

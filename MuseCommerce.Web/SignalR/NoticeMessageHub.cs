@@ -51,9 +51,9 @@ namespace MuseCommerce.Web.SignalR
         {
             NoticeMessage sendData = new NoticeMessage()
             {
-                Sender = "消息提供",
-                Content = "这个在日本投降书上签字的军官，建国后一定是个不小的干部吧？",
-                SendTime = DateTime.Now.ToString("MMdd HHmm")
+                Sender = "消息",
+                Content = "系統登錄消息",
+                SendTime = DateTime.Now.ToString("yyyyMMdd HH:mm")
             };
             Clients.All.ReviceNotice(sendData);
         }

@@ -121,6 +121,10 @@
     <Compile Include="Repositories\Migrations\201606160627530_updatefuncname1.Designer.cs">
       <DependentUpon>201606160627530_updatefuncname1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\Migrations\201606170110232_FForbidden.cs" />
+    <Compile Include="Repositories\Migrations\201606170110232_FForbidden.Designer.cs">
+      <DependentUpon>201606170110232_FForbidden.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\Migrations\ApplicationDbConfiguration.cs" />
     <Compile Include="Security\Identity\ApplicationSignInManager.cs" />
     <Compile Include="Security\Identity\ApplicationUser.cs" />
@@ -166,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositories\Migrations\201606160627530_updatefuncname1.resx">
       <DependentUpon>201606160627530_updatefuncname1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositories\Migrations\201606170110232_FForbidden.resx">
+      <DependentUpon>201606170110232_FForbidden.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Security\Identity\Migrations\201605120647332_Initial.resx">
       <DependentUpon>201605120647332_Initial.cs</DependentUpon>

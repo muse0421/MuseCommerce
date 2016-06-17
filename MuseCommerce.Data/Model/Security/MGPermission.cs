@@ -23,6 +23,8 @@ namespace MuseCommerce.Data.Model.Security
         [MaxLength(100)]        
         public string FCode { set; get; }
 
+        public bool FForbidden { set; get; } 
+
         [IgnoreDataMember]        
         public virtual List<MGRole> FRoles { get; set; }
     }

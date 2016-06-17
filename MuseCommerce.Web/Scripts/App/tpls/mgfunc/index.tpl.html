@@ -42,6 +42,10 @@
                         <th>ID</th>
                         <th>名称</th>
                         <th>路径</th>
+                        <th>順序</th>
+                        <th>狀態</th>
+                        <th>权限碼</th>
+                        <th></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -50,6 +54,21 @@
                         <td>{{ x.Id }}</td>
                         <td>{{ x.FName }}</td>
                         <td>{{ x.FUrl }}</td>
+                        <td>{{ x.FPriority }}</td>
+                        <td>
+                            <span ng-if="!x.IsActive" class="label label-warning ">
+                                禁用
+                            </span>
+                            <span ng-if="x.IsActive" class="label label-info">
+                                可用
+                            </span>
+
+                        </td>
+                        <td>{{ x.MGPermission.FName }}</td>
+                        <td class="project-actions">
+                            <a data-ng-click="forbidden(x.Id)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 禁用 </a>
+                            <a data-ng-click="restore(x.Id)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 恢復 </a>
+                        </td>
                         <td class="project-actions">
                             <a ui-sref="display({ID:'{{ x.Id }}'})" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看 </a>
                             <a ui-sref="edit({ID:'{{ x.Id }}'})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 编辑 </a>
