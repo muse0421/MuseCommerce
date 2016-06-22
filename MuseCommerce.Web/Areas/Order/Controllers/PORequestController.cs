@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MuseCommerce.Core.Common;
+using System.Data.Entity.Validation;
 
 namespace MuseCommerce.Web.Areas.Order.Controllers
 {
@@ -17,7 +19,7 @@ namespace MuseCommerce.Web.Areas.Order.Controllers
             return View();
         }
 
-        public JsonResult PORequestInfo(string FBillNo)
+        public JsonResult PORequestInfo(string FBillNo, DateTime? qsdate, DateTime? qedate)
         {
             JsonResult json = new JsonResult() { };
             json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
@@ -34,6 +36,14 @@ namespace MuseCommerce.Web.Areas.Order.Controllers
                 {
                     Temp = Temp.Where(p => p.FBillNo.StartsWith(FBillNo));
                 }
+                if (qsdate.HasValue==true)
+                {
+                    Temp = Temp.Where(p => p.FDate.CompareTo(qsdate.Value) >= 0);
+                }
+                if (qedate.HasValue == true)
+                {
+                    Temp = Temp.Where(p => p.FDate.CompareTo(qedate.Value) <= 0);
+                }
                 var oData = Temp.ToList();
 
                 var items = new
@@ -46,6 +56,29 @@ namespace MuseCommerce.Web.Areas.Order.Controllers
 
                 return json;
             }
+        }
+
+
+        public JsonResult POTranTypeInfo(string qname)
+        {
+            JsonResult json = new JsonResult() { };
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            
+            var items = new
+            {
+                data = EnumExtensions.EnumToEnumerable<POTranType>()
+            };
+
+            json.Data = items;
+
+            return json;
+
+        }
+
+
+        public ActionResult Display()
+        {
+            return View();
         }
 
         public JsonResult PORequest(string id)
@@ -76,6 +109,11 @@ namespace MuseCommerce.Web.Areas.Order.Controllers
             }
         }
 
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
         [HttpPut]
         public JsonResult PutPORequest(PORequest oData)
         {
@@ -103,6 +141,18 @@ namespace MuseCommerce.Web.Areas.Order.Controllers
             }
         }
 
+        public ActionResult CreateJ()
+        {
+            var oData = new PORequest();
+            oData.PORequestEntrys = new List<PORequestEntry>();
+            return View(oData);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
         [HttpPost]
         public JsonResult SavePORequest(PORequest oData)
         {
@@ -114,13 +164,22 @@ namespace MuseCommerce.Web.Areas.Order.Controllers
                 using (ApplicationDbContext context = new ApplicationDbContext())
                 {
                     context.Configuration.ProxyCreationEnabled = false;
+                    oData.Id = Guid.NewGuid().ToString();
+                    oData.FStatus = "N";
+
 
                     oData.CreatedBy = User.Identity.Name;
                     oData.CreatedDate = DateTime.Now;
 
-                    foreach (var item in oData.PORequestEntrys)
+                    if (oData.PORequestEntrys != null)
                     {
-                        item.CreatedDate = DateTime.Now;
+                        foreach (var item in oData.PORequestEntrys)
+                        {                            
+                            item.Id = Guid.NewGuid().ToString();
+                            item.CreatedDate = DateTime.Now;
+                            item.CreatedBy = User.Identity.Name;
+                            item.FItem = null;
+                        }
                     }
 
                     context.Set<PORequest>().Add(oData);
@@ -129,6 +188,13 @@ namespace MuseCommerce.Web.Areas.Order.Controllers
 
                 }
             }
+            catch (DbEntityValidationException ex)
+            {
+                errmsg = ex.ToString();
+                MvcApplication.mySource.TraceEvent(TraceEventType.Error, 1, ex.ToString());
+                MvcApplication.mySource.TraceInformation("Informational message.");
+            }
+            
             catch (Exception ex)
             {
                 errmsg = ex.ToString();

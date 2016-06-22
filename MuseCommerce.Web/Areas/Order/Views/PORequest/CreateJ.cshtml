@@ -1,0 +1,121 @@
+﻿@using MuseCommerce.Data.Model
+@model PORequest
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/Content/DataTables")
+}
+
+<div class="col-sm-9">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <form class="form-horizontal m-t" name="commentForm" novalidate action="/PORequest/SavePORequest" method="post">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">預定單號：</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.FBillNo, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">地址區號：</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.PoAddress.StreetNumber, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">说明：</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.FNote, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">預定日期：</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.FDate, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">詳細地址：</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.PoAddress.StreetName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">類型：</label>
+                                <div class="col-sm-8">
+                                    @Html.EnumDropDownListFor(m => m.FTranType, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive m-t">
+                        <table class="table table-striped table-bordered table-hover dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>名称</th>
+                                    <th>数量</th>
+                                    <th>单价</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{if (Model.PORequestEntrys != null)
+                                {
+                                    foreach (PORequestEntry item in Model.PORequestEntrys)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <strong>@item.FItem.FName</strong>
+                                                </div>
+                                            </td>
+                                            <td><input type="text" class="form-control" required="" /></td>
+                                            <td><input type="text" class="form-control" required="" /></td>
+                                        </tr>
+                                    }
+
+                                }}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="text-right">
+                        <button class="btn btn-primary" type="submit">
+                            提交
+                        </button>
+                        <button ui-sref="index" class="btn btn-white" type="button">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/baseform")}
+
+<script type="text/javascript">
+
+    jQuery(function ($) {
+        var FDate = { elem: "#FDate", format: "YYYY/MM/DD", min: "2016-01-01", max: "2099-06-16", istime: false, istoday: true, issure: false };
+        //var end = { elem: "#qedate", format: "YYYY/MM/DD", min: laydate.now(), max: "2099-06-16", istime: true, istoday: false, choose: function (datas) { start.max = datas } };
+        laydate(FDate);
+        //laydate(end);
+    });
+
+
+</script>

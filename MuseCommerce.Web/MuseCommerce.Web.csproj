@@ -2563,6 +2563,7 @@
     <Content Include="Scripts\App\tpls\mgitem\display.tpl.html" />
     <Content Include="Scripts\App\tpls\mgitem\edit.tpl.html" />
     <Content Include="Scripts\App\tpls\mgitem\index.tpl.html" />
+    <Content Include="Scripts\App\tpls\mgitem\Search.tpl.html" />
     <Content Include="Scripts\App\tpls\mgpermission\create.tpl.html" />
     <Content Include="Scripts\App\tpls\mgpermission\display.tpl.html" />
     <Content Include="Scripts\App\tpls\mgpermission\edit.tpl.html" />
@@ -2651,6 +2652,7 @@
     <Content Include="Scripts\plugins\gritter\jquery.gritter.css" />
     <Content Include="Scripts\plugins\gritter\jquery.gritter.min.js" />
     <Content Include="Scripts\plugins\iCheck\icheck.min.html" />
+    <Content Include="Scripts\plugins\iCheck\icheck.min.js" />
     <Content Include="Scripts\plugins\ionRangeSlider\ion.rangeSlider.min.js" />
     <Content Include="Scripts\plugins\jasny\jasny-bootstrap.min.js" />
     <Content Include="Scripts\plugins\jeditable\jquery.jeditable.js" />
@@ -2666,6 +2668,9 @@
     <Content Include="Scripts\plugins\layer\layim\layim.css" />
     <Content Include="Scripts\plugins\layer\layim\layim.js" />
     <Content Include="Scripts\plugins\layer\layim\loading.gif" />
+    <Content Include="Scripts\plugins\layer\skin\layer.css" />
+    <Content Include="Scripts\plugins\layer\skin\layer.ext.css" />
+    <Content Include="Scripts\plugins\layer\skin\moon\style.css" />
     <Content Include="Scripts\plugins\markdown\bootstrap-markdown.js" />
     <Content Include="Scripts\plugins\markdown\bootstrap-markdown.zh.js" />
     <Content Include="Scripts\plugins\markdown\markdown.js" />
@@ -2674,6 +2679,19 @@
     <Content Include="Scripts\plugins\morris\morris.js" />
     <Content Include="Scripts\plugins\morris\raphael-2.1.0.min.js" />
     <Content Include="Scripts\plugins\nestable\jquery.nestable.js" />
+    <Content Include="Scripts\plugins\ngDialog\css\myth\ngDialog-theme-default.css" />
+    <Content Include="Scripts\plugins\ngDialog\css\myth\ngDialog-theme-plain.css" />
+    <Content Include="Scripts\plugins\ngDialog\css\myth\ngDialog.css" />
+    <Content Include="Scripts\plugins\ngDialog\css\ngDialog-custom-width.css" />
+    <Content Include="Scripts\plugins\ngDialog\css\ngDialog-theme-default.css" />
+    <Content Include="Scripts\plugins\ngDialog\css\ngDialog-theme-default.min.css" />
+    <Content Include="Scripts\plugins\ngDialog\css\ngDialog-theme-flat.css" />
+    <Content Include="Scripts\plugins\ngDialog\css\ngDialog-theme-plain.css" />
+    <Content Include="Scripts\plugins\ngDialog\css\ngDialog-theme-plain.min.css" />
+    <Content Include="Scripts\plugins\ngDialog\css\ngDialog.css" />
+    <Content Include="Scripts\plugins\ngDialog\css\ngDialog.min.css" />
+    <Content Include="Scripts\plugins\ngDialog\js\ngDialog.js" />
+    <Content Include="Scripts\plugins\ngDialog\js\ngDialog.min.js" />
     <Content Include="Scripts\plugins\nouslider\jquery.nouislider.min.js" />
     <Content Include="Scripts\plugins\pace\pace.min.js" />
     <Content Include="Scripts\plugins\peity\jquery.peity.min.js" />
@@ -2697,11 +2715,16 @@
     <Content Include="Scripts\plugins\switchery\switchery.js" />
     <Content Include="Scripts\plugins\toastr\toastr.min.js" />
     <Content Include="Scripts\plugins\treeview\bootstrap-treeview.js" />
+    <Content Include="Scripts\plugins\v-modal\v-modal.css" />
+    <Content Include="Scripts\plugins\v-modal\v-modal.js" />
+    <Content Include="Scripts\plugins\v-modal\v-modal.min.css" />
+    <Content Include="Scripts\plugins\v-modal\v-modal.min.js" />
     <Content Include="Scripts\plugins\validate\jquery.validate.min.js" />
     <Content Include="Scripts\plugins\validate\messages_zh.min.js" />
     <Content Include="Scripts\plugins\webuploader\index.html" />
     <Content Include="Scripts\plugins\webuploader\webuploader.min.js" />
     <Content Include="Scripts\signalr.ap.js" />
+    <Content Include="Scripts\underscore-min.js" />
     <Content Include="Scripts\welcome.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -2765,6 +2788,10 @@
     <Content Include="Areas\Manage\Views\MGRole\Index.cshtml" />
     <Content Include="Areas\MGCode\Views\web.config" />
     <Content Include="Areas\MGCode\Views\Item\Index.cshtml" />
+    <Content Include="Areas\Order\Views\PORequest\Display.cshtml" />
+    <Content Include="Areas\Order\Views\PORequest\Create.cshtml" />
+    <Content Include="Areas\Order\Views\PORequest\Edit.cshtml" />
+    <Content Include="Areas\Order\Views\PORequest\CreateJ.cshtml" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_NoticeMessage.cshtml" />

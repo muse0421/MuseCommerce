@@ -88,3 +88,13 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Da
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.Repositories.Migrations.updatefuncname.resources
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.Repositories.Migrations.updatefuncname1.resources
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.Repositories.Migrations.Item.resources
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\System.Web.Mvc.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\System.Web.Razor.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\System.Web.WebPages.Razor.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\System.Web.WebPages.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\System.Web.Mvc.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\System.Web.Razor.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\System.Web.WebPages.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\System.Web.WebPages.Deployment.xml

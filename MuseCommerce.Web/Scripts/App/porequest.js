@@ -1,8 +1,20 @@
-﻿var AppDependencies = ['ui.router', 'ngAnimate'];
+﻿var underscore = angular.module('underscore', []);
+underscore.factory('_', ['$window', function ($window) {
+    return $window._; // assumes underscore has already been loaded on the page
+}]);
+
+var AppDependencies = ['ui.router', 'ngAnimate', 'ngDialog', 'vModal', 'underscore'];
 var app = angular.module('porequestapp', AppDependencies);
+
+app.factory('SearchModal', function (vModal) {
+    return vModal({
+        controller: 'IndexmgitemCtrl',
+        controllerAs: 'SearchModal',
+        templateUrl: '/Scripts/App/tpls/mgitem/search.tpl.html'        
+    });
+});
 app.controller('porequestCtrl', function ($scope, $http) {
-    
-   
+
 }).config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
     $httpProvider.interceptors.push(['$rootScope', '$q', '$location', '$timeout',
@@ -34,33 +46,7 @@ app.controller('porequestCtrl', function ($scope, $http) {
                 }
             };
         }]);
-
-    $stateProvider
-        .state('index', {
-            url: '/index',
-            views: {
-                '': { templateUrl: '/Scripts/App/tpls/porequest/index.tpl.html' }
-            }
-        })
-        .state('create', {
-            url: '/create',
-            views: {
-                '': { templateUrl: '/Scripts/App/tpls/porequest/create.tpl.html' }
-            }
-        }).state('edit', {
-            url: '/edit/{ID}',
-            views: {
-                '': { templateUrl: '/Scripts/App/tpls/porequest/edit.tpl.html' }
-            }
-        })
-        .state('display', {
-            url: '/{ID}',
-            views: {
-                '': { templateUrl: '/Scripts/App/tpls/porequest/display.tpl.html' }
-            }
-        });
-
-        $urlRouterProvider.otherwise('/index');
+   
 }])
 .run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
@@ -68,18 +54,29 @@ app.controller('porequestCtrl', function ($scope, $http) {
     
 }]);
 
+app.filter("jsonDate", function ($filter) {
+    return function (input, format) {
+        //从字符串 /Date(1448864369815)/ 得到时间戳 1448864369815
+        var timestamp = Number(input.replace(/\/Date\((\d+)\)\//, "$1"));
+        //转成指定格式
+        return $filter("date")(timestamp, format);
+    };
+});
+
+
 
 app.controller('IndexporequestCtrl', function ($scope, $http, $state, $stateParams) {
    
-    $scope.qname = "";
-    $scope.qurl = "";
+    $scope.qbillno = "";
+    $scope.qsdate = "";
+    $scope.qedate = "";
 
     $scope.search = function () {
-        var config = { params: { 'qname': $scope.qname, 'qurl': $scope.qurl } };
+        var config = { params: { 'qbillno': $scope.qbillno, 'qsdate': $scope.qsdate, 'qedate': $scope.qedate } };
         $http.get("/Order/PORequest/porequestInfo", config)
-        .success(function (response) { $scope.porequests = response.data; });
-
-        console.log('search');
+        .success(function (response) {
+            $scope.porequests = response.data;
+        });
     };
 
     $scope.search();
@@ -88,9 +85,7 @@ app.controller('IndexporequestCtrl', function ($scope, $http, $state, $statePara
 
 
 app.controller('EditporequestCtrl', function ($scope, $http, $state, $stateParams) {
-
-    console.log($stateParams.ID);
-
+    
     $scope.loadporequest = function () {
         var config = { params: { 'ID': $stateParams.ID } };
         $http.get("/Order/PORequest/porequest", config)
@@ -104,8 +99,6 @@ app.controller('EditporequestCtrl', function ($scope, $http, $state, $stateParam
         $http.put("/Order/PORequest/Putporequest", data, config)
         .success(function (response) {
             $scope.success = response.success;
-            console.log('save');
-            console.log($scope.success);
         });
     };
 
@@ -125,21 +118,153 @@ app.controller('DisplayporequestCtrl', function ($scope, $http, $state, $statePa
 
 });
 
-app.controller('CreateporequestCtrl', function ($scope, $http, $state, $stateParams) {
-    $scope.porequest = { 'Id': "2020", "FBillNo": "12121212", "FDate": "2016/01/01", "FNote": "", "FStatus": "", "PoAddress": { "StreetNumber": "", "StreetName": "" }, "PORequestEntrys": [{ "Id": "1", "FQty": "25.0", "FPrice": "7", "FInterID": "1", "PORequest_Id": "2020" }, { "Id": "2", "FQty": "33.0", "FPrice": "7", "FInterID": "3", "PORequest_Id": "2020" }, { "Id": "3", "FQty": "125.0", "FPrice": "7", "FInterID": "9", "PORequest_Id": "2020" }] };
+
+app.controller('CreateParentporequestCtrl', function ($scope, $http, $state, $stateParams) {
+    
+});
+
+app.controller('CreateporequestCtrl', function ($scope, $http, $state, $stateParams, SearchModal,_) {
+    
+    $http.get("/Order/PORequest/POTranTypeInfo")
+        .success(function (response) {
+            $scope.POTranTypeInfo = response.data;
+
+            $scope.porequest = {
+                'Id': "", "FBillNo": "", "FDate": "", "FNote": "", "FTranType": "",
+                "FStatus": "", "PoAddress": { "StreetNumber": "", "StreetName": "" },
+                "PORequestEntrys": []
+            };
+        });
     
     $scope.save = function () {
-
-        console.log('save');
        
         var config = {};
         var data = $scope.porequest;
         $http.post("/Order/PORequest/Saveporequest", data, config)
         .success(function (response) {
             $scope.success = response.success;
-            console.log('save');
-            console.log(response.data);
         });       
     };
 
+
+    SearchModal.itemadd = function (msg)
+    {
+        angular.forEach(msg, function (item) {
+            if (item.check) {
+
+                var PORequestEntry = new Object();
+
+                PORequestEntry.FInterID = "Add";
+                PORequestEntry.FItemID = item.Id;
+                PORequestEntry.FItem = new Object();
+                PORequestEntry.FItem.FName = item.FName;
+                PORequestEntry.FQty = 0;
+                PORequestEntry.FPrice = 0;
+
+                if (_.isUndefined(_.findWhere($scope.porequest.PORequestEntrys, { FItemID: item.Id }))) {                    
+                    $scope.porequest.PORequestEntrys.push(PORequestEntry);
+                }
+            }
+        });
+        SearchModal.deactivate();
+    }
+
+    
+    $scope.open = function () {
+        SearchModal.activate();
+    };
+
+
 });
+
+
+app.controller('IndexmgitemCtrl', function ($scope, $http, $state, $stateParams, SearchModal) {
+    var ctrl = this;
+
+    ctrl.close = SearchModal.deactivate;
+
+    $scope.start = 0;
+    $scope.length = 8;
+    $scope.recordsTotal = 0;
+
+    $scope.qname = "";
+    $scope.qnumber = "";
+
+
+    $scope.search = function () {
+        var config = {
+            params: {
+                'qname': $scope.qname, 'qnumber': $scope.qnumber,
+                'start': $scope.start, 'length': $scope.length
+            }
+        };
+        
+        $http.get("/MGCode/Item/ItemCoreInfo", config)
+        .success(function (response) {
+
+            angular.forEach(response.data, function (item) {
+                item.check = false;
+            });
+
+            $scope.start = response.start;
+            $scope.recordsTotal = response.recordsTotal;
+            $scope.mgitems = response.data;
+
+            $scope.pagination();
+        });
+    };
+
+    $scope.query = function () {
+        $scope.start = 0;
+        $scope.search();
+    }
+
+    $scope.checkok = function () {
+
+        var checkitems = new Array();
+        angular.forEach($scope.mgitems, function (item) {
+            if (item.check)
+            {
+                checkitems.push(item);
+            }
+        });
+        SearchModal.itemadd(checkitems);       
+        
+        angular.forEach($scope.mgitems, function (item) {
+            item.check = false;
+        });
+       
+    };
+
+    $scope.setpagination = function (pageflag) {
+
+        switch (pageflag) {
+            case "first":
+                $scope.start = 0;
+                break;
+            case "prev":
+                $scope.start = ($scope.pageIndex - 2) * $scope.length;
+                break;
+            case "next":
+                $scope.start = ($scope.pageIndex) * $scope.length;
+                break;
+            case "last":
+                $scope.start = ($scope.endIndex - 1) * $scope.length;
+                break;
+        }
+        $scope.search();
+    }
+
+    $scope.pagination = function () {
+        $scope.pageIndex = parseInt($scope.start / $scope.length) + 1;
+        $scope.endIndex = parseInt($scope.recordsTotal / $scope.length) + 1;
+        $scope.first = $scope.pageIndex <= 1 ? false : true;
+        $scope.last = $scope.pageIndex >= $scope.endIndex ? false : true;
+        $scope.prev = $scope.pageIndex > 1 ? true : false;
+        $scope.next = $scope.pageIndex < $scope.endIndex ? true : false;
+    }
+    
+    $scope.search();
+
+});
+

@@ -1,0 +1,79 @@
+﻿<v-modal class="vModal--default" onclose="SearchModal.close()">
+    <v-dialog heading="Account Login" large>
+        <v-close label="Close"></v-close>
+        <div class="row wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <form method="get" class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-sm-1 control-label">號碼</label>
+
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" ng-model="qnumber">
+                        </div>
+                        <label class="col-sm-1 control-label">名称</label>
+
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" ng-model="qname">
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-sm btn-primary" ng-click="query()"> 搜索</button>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <button type="button" class="btn btn-sm btn-white" ng-click="SearchModal.close()">关闭</button>
+                            <button type="button" class="btn btn-sm btn-primary" ng-click="checkok()">確定</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+
+                <ul class="pagination pull-left">
+                    <li class="footable-page disabled"><div>显示 {{start+1}} 到 {{start+length>recordsTotal?recordsTotal:start+length}} 项，共 {{recordsTotal}} 项</div></li>
+                </ul>
+                <ul class="pagination pull-right">
+                    <li class="footable-page-arrow"><a ng-click="setpagination('first')" ng-if="first" data-page="first">«</a></li>
+                    <li class="footable-page-arrow"><a ng-click="setpagination('prev')" ng-if="prev" data-page="prev">‹</a></li>
+                    <li class="footable-page disabled"><a>{{ pageIndex }}</a></li>
+                    <li class="footable-page-arrow"><a ng-click="setpagination('next')" ng-if="next" data-page="next">›</a></li>
+                    <li class="footable-page-arrow"><a ng-click="setpagination('last')" ng-if="last" data-page="last">»</a></li>
+                </ul>
+
+
+            </div>
+            <div class="row">
+                <table id="mgitem_datatable" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>選擇</th>
+                            <th>號碼</th>
+                            <th>短號</th>
+                            <th>名称</th>
+                            <th>型號</th>
+                            <th>狀態</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in mgitems">
+                            <td>
+                                <input type="checkbox" ng-model="x.check" ng-true-value="true" ng-false-value="false" class="i-checks" />
+                            </td>
+                            <td>{{ x.FNumber }}</td>
+                            <td>{{ x.FShortNumber }}</td>
+                            <td>{{ x.FName }}</td>
+                            <td>{{ x.FModel }}</td>
+                            <td>
+                                <span ng-if="x.FForbidden" class="text-warning">
+                                    禁用
+                                </span>
+                                <span ng-if="!x.FForbidden">
+                                    <i class="fa fa-check text-navy"></i>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </v-dialog>
+</v-modal>

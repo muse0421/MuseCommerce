@@ -14,9 +14,22 @@ namespace MuseCommerce.Web
                     "~/Content/animate.min.css",
                     "~/Content/plugins/iCheck/custom.css",
                     "~/Content/plugins/toastr/toastr.min.css",
+                    "~/Content/plugins/datapicker/datepicker3.css",
+                    "~/Content/plugins/layer/laydate/need/laydate.css",
+                    "~/Content/plugins/iCheck/custom.css",
                     "~/Content/plugins/sweetalert/sweetalert.css",
+                     "~/Content/plugins/jasny/jasny-bootstrap.min.css",
+                     "~/Content/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css",
+
+                     "~/Scripts/plugins/ngDialog/css/ngDialog.css",
+                     "~/Scripts/plugins/ngDialog/css/ngDialog-theme-default.css",
+                     "~/Scripts/plugins/ngDialog/css/ngDialog-theme-flat.css",
+
+                     "~/Scripts/plugins/v-modal/v-modal.min.css",
+
                     "~/Content/style.min862f.css"));
 
+           
             bundles.Add(new StyleBundle("~/Content/DataTables").Include(
                    "~/Content/plugins/bootstrap-table/bootstrap-table.min.css"));
           
@@ -28,6 +41,7 @@ namespace MuseCommerce.Web
                      "~/Scripts/jquery-1.9.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                        "~/Scripts/underscore-min.js",
                         "~/Scripts/bootstrap.min.js",
                         "~/Scripts/plugins/metisMenu/jquery.metisMenu.js",
                         "~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js",                       
@@ -43,14 +57,24 @@ namespace MuseCommerce.Web
                        "~/Scripts/plugins/dataTables/jquery.dataTables.js",
                        "~/Scripts/plugins/dataTables/dataTables.bootstrap.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
-                                    "~/Scripts/bootstrap-datepicker.js"));
+            bundles.Add(new ScriptBundle("~/bundles/baseform").Include(
+                                    "~/Scripts/plugins/datapicker/bootstrap-datepicker.js",
+                                    //"~/Scripts/plugins/layer/laydate/laydate.js",
+                                    "~/Scripts/plugins/jasny/jasny-bootstrap.min.js",
+                                    "~/Scripts/plugins/iCheck/icheck.min.js",                                    
+                                    "~/Scripts/plugins/validate/jquery.validate.min.js",
+                                    "~/Scripts/plugins/validate/messages_zh.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ngbaseform").Include(                                   
+                                   "~/Scripts/plugins/ngDialog/js/ngDialog.js",
+                                    "~/Scripts/plugins/v-modal/v-modal.js"
+                                   ));
 
             bundles.Add(new ScriptBundle("~/bundles/otherplugin").Include(
                         "~/Scripts/hplus.js-v=2.2.0.js",
                         "~/Scripts/pace.min.js",
                         "~/Scripts/jquery.steps.min.js",
-                        "~/Scripts/jquery.validate.min.js",
+                       
                         "~/Scripts/messages_zh.min.js",
                         "~/Scripts/toastr.min.js",
                         "~/Scripts/sweetalert.min.js"));
@@ -68,6 +92,8 @@ namespace MuseCommerce.Web
                      "~/Scripts/angualer-ui/ui-grid/ng-grid.min.js",
                      "~/Scripts/angualer-ui/ui-grid/ng-grid-layout.js"));
 
+            #region
+
             bundles.Add(new ScriptBundle("~/bundles/mgfuncapp").Include(
                        "~/Scripts/App/mgfunc.js"));
             bundles.Add(new ScriptBundle("~/bundles/mgroleapp").Include(
@@ -80,10 +106,10 @@ namespace MuseCommerce.Web
             bundles.Add(new ScriptBundle("~/bundles/mgitemapp").Include(
                     "~/Scripts/App/mgitem.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/porequestapp").Include(
+            bundles.Add(new ScriptBundle("~/bundles/porequest").Include(
                        "~/Scripts/App/porequest.js"));
 
-
+            #endregion
         }
     }
 }

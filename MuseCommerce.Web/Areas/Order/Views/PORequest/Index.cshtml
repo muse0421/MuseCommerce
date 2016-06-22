@@ -7,15 +7,99 @@
 @section styles {
     @Styles.Render("~/Content/DataTables")
 }
+<div class="row">
+    <div class="col-sm-12" ng-app="porequestapp" ng-controller="IndexporequestCtrl">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>所有项目</h5>
+                <div class="ibox-tools">
+                    @Html.ActionLink("创建新项目", "Create", null, new { @class = "btn btn-primary btn-xs" })
+                </div>
+            </div>
+            <div class="ibox-content no-padding">
+                <form method="get" class="form-horizontal">
+
+                    <div class="form-group row">
+
+                        <label class="col-sm-1 control-label">預定單號</label>
+
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" ng-model="qbillno">
+                        </div>
+
+                        <label class="col-sm-1 control-label">預定起期</label>
+
+                        <div class="col-sm-2">
+                            <input type="text" ng-model="qsdate" class="form-control layer-date" id="qsdate">
+                        </div>
+                        <label class="col-sm-1 control-label">預定迄日</label>
+
+                        <div class="col-sm-2">
+                            <input type="text" ng-model="qedate" class="form-control layer-date" id="qedate">
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-sm btn-primary" ng-click="search()"> 搜索</button>
+                        </div>
+                    </div>
+                </form>
 
 
+            </div>
+        </div>
 
-<div class="row" ng-app="porequestapp" ng-controller="porequestCtrl">
-    <div ui-view></div>
+        <div class="ibox">
+            <div class="ibox-content">
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>預定單號</th>
+                            <th>預定日期</th>
+                            <th>说明</th>
+                            <th>状态</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in porequests">
+                            <td>{{ x.FBillNo }}</td>
+                            <td>{{ x.FDate| jsonDate:'yyyy/MM/dd' }}</td>
+                            <td>{{ x.FNote }}</td>
+                            <td>{{ x.FStatus }}</td>
+                            <td class="project-actions">
+                                @Html.ActionLink("查看", "Display", null, new { @class = "btn btn-white btn-sm" })
+                                @Html.ActionLink("编辑", "Edit", null, new { @class = "btn btn-white btn-sm" })
+                                <a ui-sref="display({ID:'{{ x.Id }}'})" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看 </a>
+                                <a ui-sref="edit({ID:'{{ x.Id }}'})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 编辑 </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
 </div>
-
 @section Scripts {
+    @Scripts.Render("~/bundles/baseform")
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/angularui")
-    @Scripts.Render("~/bundles/porequestapp")
+    @Scripts.Render("~/bundles/porequest")
 }
+
+<script type="text/javascript">
+
+    jQuery(function ($) {
+
+        $("#qsdate").datepicker({ todayBtn: "linked", keyboardNavigation: !1, forceParse: !1, calendarWeeks: !0, autoclose: !0 })
+        $("#qedate").datepicker({ todayBtn: "linked", keyboardNavigation: !1, forceParse: !1, calendarWeeks: !0, autoclose: !0 })
+
+        //var start = { elem: "#qsdate", format: "YYYY/MM/DD", min: laydate.now(), max: "2099-06-16", istime: true, istoday: false, choose: function (datas) { end.min = datas; end.start = datas } };
+        //var end = { elem: "#qedate", format: "YYYY/MM/DD", min: laydate.now(), max: "2099-06-16", istime: true, istoday: false, choose: function (datas) { start.max = datas } };
+                
+        //laydate(start);
+        //laydate(end);
+    });
+
+
+</script>
