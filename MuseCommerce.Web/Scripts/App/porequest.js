@@ -3,7 +3,13 @@ underscore.factory('_', ['$window', function ($window) {
     return $window._; // assumes underscore has already been loaded on the page
 }]);
 
-var AppDependencies = ['ui.router', 'ngAnimate', 'ngDialog', 'vModal', 'underscore'];
+var ngdatepicker = angular.module('ngdatepicker', []);
+ngdatepicker.factory('mydatepicker', [function () {
+    var jquery = $;
+    return jquery; // assumes underscore has already been loaded on the page
+}]);
+
+var AppDependencies = ['ui.router', 'ngAnimate', 'ngDialog', 'vModal', 'underscore', 'ngdatepicker'];
 var app = angular.module('porequestapp', AppDependencies);
 
 app.factory('SearchModal', function (vModal) {
@@ -14,6 +20,8 @@ app.factory('SearchModal', function (vModal) {
     });
 });
 app.controller('porequestCtrl', function ($scope, $http) {
+
+    
 
 }).config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
@@ -47,6 +55,38 @@ app.controller('porequestCtrl', function ($scope, $http) {
             };
         }]);
    
+    $stateProvider
+        .state('index', {
+            url: '/index',
+            views: {
+                '': { templateUrl: '/Scripts/App/tpls/porequest/index.tpl.html' }
+            }
+        })
+        .state('create', {
+            url: '/create',
+            views: {
+                '': { templateUrl: '/Scripts/App/tpls/porequest/create.tpl.html' }
+            }
+        }).state('edit', {
+            url: '/edit/{ID}',
+            views: {
+                '': { templateUrl: '/Scripts/App/tpls/porequest/edit.tpl.html' }
+            }
+        })
+        .state('display', {
+            url: '/{ID}',
+            views: {
+                '': { templateUrl: '/Scripts/App/tpls/porequest/display.tpl.html' }
+            }
+        })
+        .state('setting', {
+            url: '/setting/{ID}',
+            views: {
+                '': { templateUrl: '/Scripts/App/tpls/porequest/setting.tpl.html' }
+            }
+        });
+
+    $urlRouterProvider.otherwise('/index');
 }])
 .run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
@@ -63,10 +103,8 @@ app.filter("jsonDate", function ($filter) {
     };
 });
 
-
-
-app.controller('IndexporequestCtrl', function ($scope, $http, $state, $stateParams) {
-   
+app.controller('IndexporequestCtrl', function ($scope, $http, $state, $stateParams, mydatepicker) {
+    mydatepicker('[data-provide="datepicker-inline"]').datepicker();
     $scope.qbillno = "";
     $scope.qsdate = "";
     $scope.qedate = "";
@@ -83,72 +121,18 @@ app.controller('IndexporequestCtrl', function ($scope, $http, $state, $statePara
 
 });
 
-
-app.controller('EditporequestCtrl', function ($scope, $http, $state, $stateParams) {
-    
-    $scope.loadporequest = function () {
-        var config = { params: { 'ID': $stateParams.ID } };
-        $http.get("/Order/PORequest/porequest", config)
-        .success(function (response) { $scope.porequest = response.data; });
-
-    };
-
-    $scope.save = function () {
-        var config = {};
-        var data = $scope.porequest;
-        $http.put("/Order/PORequest/Putporequest", data, config)
-        .success(function (response) {
-            $scope.success = response.success;
-        });
-    };
-
-    $scope.loadporequest();
-
-});
-
-app.controller('DisplayporequestCtrl', function ($scope, $http, $state, $stateParams) {
-    $scope.porequestid = $stateParams.ID;
-    $scope.loadporequest = function () {
-        var config = { params: { 'ID': $stateParams.ID } };
-        $http.get("/Order/PORequest/porequest", config)
-        .success(function (response) { $scope.porequest = response.data; });
-    };
-
-    $scope.loadporequest();
-
-});
-
-
-app.controller('CreateParentporequestCtrl', function ($scope, $http, $state, $stateParams) {
-    
-});
-
-app.controller('CreateporequestCtrl', function ($scope, $http, $state, $stateParams, SearchModal,_) {
-    
+app.controller('EditporequestCtrl', function ($scope, $http, $state, $stateParams, SearchModal, mydatepicker) {
+    mydatepicker('[data-provide="datepicker-inline"]').datepicker();
     $http.get("/Order/PORequest/POTranTypeInfo")
         .success(function (response) {
             $scope.POTranTypeInfo = response.data;
 
-            $scope.porequest = {
-                'Id': "", "FBillNo": "", "FDate": "", "FNote": "", "FTranType": "",
-                "FStatus": "", "PoAddress": { "StreetNumber": "", "StreetName": "" },
-                "PORequestEntrys": []
-            };
+            var config = { params: { 'ID': $stateParams.ID } };
+            $http.get("/Order/PORequest/porequest", config)
+            .success(function (response) { $scope.porequest = response.data; });
         });
-    
-    $scope.save = function () {
-       
-        var config = {};
-        var data = $scope.porequest;
-        $http.post("/Order/PORequest/Saveporequest", data, config)
-        .success(function (response) {
-            $scope.success = response.success;
-        });       
-    };
 
-
-    SearchModal.itemadd = function (msg)
-    {
+    SearchModal.itemadd = function (msg) {
         angular.forEach(msg, function (item) {
             if (item.check) {
 
@@ -161,13 +145,89 @@ app.controller('CreateporequestCtrl', function ($scope, $http, $state, $statePar
                 PORequestEntry.FQty = 0;
                 PORequestEntry.FPrice = 0;
 
-                if (_.isUndefined(_.findWhere($scope.porequest.PORequestEntrys, { FItemID: item.Id }))) {                    
+                if (_.isUndefined(_.findWhere($scope.porequest.PORequestEntrys, { FItemID: item.Id }))) {
                     $scope.porequest.PORequestEntrys.push(PORequestEntry);
                 }
             }
         });
         SearchModal.deactivate();
     }
+
+    $scope.open = function () {
+        SearchModal.activate();
+    };
+   
+    $scope.save = function () {
+        var config = {};
+        var data = $scope.porequest;
+        $http.put("/Order/PORequest/Putporequest", data, config)
+        .success(function (response) {
+            $scope.success = response.success;
+        });
+    };
+
+
+});
+
+app.controller('DisplayporequestCtrl', function ($scope, $http, $state, $stateParams) {
+    $scope.porequestid = $stateParams.ID;
+    $scope.loadporequest = function () {
+        var config = { params: { 'ID': $stateParams.ID } };
+        $http.get("/Order/PORequest/porequest", config)
+        .success(function (response) {
+            $scope.porequest = response.data;
+            console.log($scope.porequest);
+        });
+    };
+
+    $scope.loadporequest();
+
+});
+
+app.controller('CreateporequestCtrl', function ($scope, $http, $state, $stateParams, SearchModal, _, mydatepicker) {
+    mydatepicker('[data-provide="datepicker-inline"]').datepicker();
+    $http.get("/Order/PORequest/POTranTypeInfo")
+        .success(function (response) {
+            $scope.POTranTypeInfo = response.data;
+
+            $scope.porequest = {
+                'Id': "", "FBillNo": "", "FDate": "", "FNote": "", "FTranType": "",
+                "FStatus": "", "PoAddress": { "StreetNumber": "", "StreetName": "" },
+                "PORequestEntrys": []
+            };
+        });
+    
+    SearchModal.itemadd = function (msg) {
+        angular.forEach(msg, function (item) {
+            if (item.check) {
+
+                var PORequestEntry = new Object();
+
+                PORequestEntry.FInterID = "Add";
+                PORequestEntry.FItemID = item.Id;
+                PORequestEntry.FItem = new Object();
+                PORequestEntry.FItem.FName = item.FName;
+                PORequestEntry.FQty = 0;
+                PORequestEntry.FPrice = 0;
+
+                if (_.isUndefined(_.findWhere($scope.porequest.PORequestEntrys, { FItemID: item.Id }))) {
+                    $scope.porequest.PORequestEntrys.push(PORequestEntry);
+                }
+            }
+        });
+        SearchModal.deactivate();
+    }
+    
+    $scope.save = function () {       
+        var config = {};
+        var data = $scope.porequest;
+        console.log(data);
+        return;
+        $http.post("/Order/PORequest/Saveporequest", data, config)
+        .success(function (response) {
+            $scope.success = response.success;
+        });       
+    };
 
     
     $scope.open = function () {
@@ -176,7 +236,6 @@ app.controller('CreateporequestCtrl', function ($scope, $http, $state, $statePar
 
 
 });
-
 
 app.controller('IndexmgitemCtrl', function ($scope, $http, $state, $stateParams, SearchModal) {
     var ctrl = this;

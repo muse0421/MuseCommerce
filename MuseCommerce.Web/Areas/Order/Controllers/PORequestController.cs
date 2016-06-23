@@ -82,14 +82,11 @@ namespace MuseCommerce.Web.Areas.Order.Controllers
         }
 
         public JsonResult PORequest(string id)
-        {
-            JsonResult json = new JsonResult() { };
-            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-
+        {  
             using (ApplicationDbContext context = new ApplicationDbContext())
             {
                 context.Configuration.ProxyCreationEnabled = false;
-                IQueryable<PORequest> Temp = context.Set<PORequest>();
+                IQueryable<PORequest> Temp = context.Set<PORequest>().Include("PORequestEntrys").Include("PORequestEntrys.FItem");
 
 
                 if (!string.IsNullOrEmpty(id))
@@ -97,15 +94,13 @@ namespace MuseCommerce.Web.Areas.Order.Controllers
                     Temp = Temp.Where(p => p.Id.StartsWith(id));
                 }
                 var oData = Temp.FirstOrDefault();
-
+                
                 var items = new
                 {
                     data = oData
                 };
 
-                json.Data = items;
-
-                return json;
+                return Json(items,JsonRequestBehavior.AllowGet);
             }
         }
 

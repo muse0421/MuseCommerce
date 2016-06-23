@@ -53,3 +53,4 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\System.Web.Razo
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\System.Web.WebPages.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\System.Web.WebPages.Deployment.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\obj\Debug\MuseCommerce.Core.csprojResolveAssemblyReference.cache

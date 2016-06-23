@@ -1,9 +1,9 @@
-﻿<div class="col-sm-12" ng-controller="IndexporequestCtrl">
+﻿<div class="col-sm-12" ng-app="porequestapp" ng-controller="IndexporequestCtrl">
     <div class="ibox">
         <div class="ibox-title">
             <h5>所有项目</h5>
-            <div class="ibox-tools">
-                <a ui-sref="create" class="btn btn-primary btn-xs">创建新项目</a>
+            <div class="ibox-tools">                
+                <a ui-sref="create" class="btn btn-primary btn-xs">新增</a>
             </div>
         </div>
         <div class="ibox-content no-padding">
@@ -11,18 +11,34 @@
 
                 <div class="form-group row">
 
-                    <label class="col-sm-1 control-label">编号</label>
+                    <label class="col-sm-1 control-label">預定單號</label>
 
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" ng-model="FBillNo">
+                        <input type="text" class="form-control" ng-model="qbillno">
                     </div>
 
-                    <label class="col-sm-1 control-label">日期</label>
+                    <label class="col-sm-1 control-label">預定起期</label>
+
+                    <div class="col-sm-4">
+                        <div class="input-group input-daterange">
+                            <input type="text" ng-model="qsdate" class="form-control layer-date" id="qsdate"
+                                   data-provide="datepicker-inline" data-date-format="yyyy/mm/dd"
+                                   data-date-autoclose="true"
+                                   data-date-today-btn="linked"
+                                   data-date-today-highlight="true"
+                                   data-date-clear-btn="true">
+                            <span class="input-group-addon">to</span>
+                            <input type="text" ng-model="qedate" class="form-control layer-date" id="qedate"
+                                   data-provide="datepicker-inline" data-date-format="yyyy/mm/dd"
+                                   data-date-autoclose="true"
+                                   data-date-today-btn="linked"
+                                   data-date-today-highlight="true"
+                                   data-date-clear-btn="true">
+                        </div>
 
 
-                    <div class="col-sm-2">
-                        <input type="text"  ng-model="FDate" class="form-control layer-date" placeholder="YYYY/MM-DD" onclick="laydate({istime: false,issure:false, format: 'YYYY/MM/DD'})">
                     </div>
+
                     <div class="col-sm-2">
                         <button type="button" class="btn btn-sm btn-primary" ng-click="search()"> 搜索</button>
                     </div>
@@ -39,9 +55,8 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>编号</th>
-                        <th>日期</th>
+                        <th>預定單號</th>
+                        <th>預定日期</th>
                         <th>说明</th>
                         <th>状态</th>
                         <th></th>
@@ -49,9 +64,8 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="x in porequests">
-                        <td>{{ x.Id }}</td>
                         <td>{{ x.FBillNo }}</td>
-                        <td>{{ x.FDate }}</td>
+                        <td>{{ x.FDate| jsonDate:'yyyy/MM/dd' }}</td>
                         <td>{{ x.FNote }}</td>
                         <td>{{ x.FStatus }}</td>
                         <td class="project-actions">

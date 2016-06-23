@@ -19,7 +19,8 @@ namespace MuseCommerce.Core
             Settings = new JsonSerializerSettings
             {
                 //这句是解决问题的关键,也就是json.net官方给出的解决配置选项.                 
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                DateFormatString = "yyyy/MM/dd"
             };
         }
 
