@@ -38,7 +38,7 @@ namespace MuseCommerce.Data.Repositories
         public ApplicationDbContext()
             : base("SeCommerce2")
         {
-            //Database.SetInitializer<ApplicationDbContext>(new DBInitializer());           
+            //Database.SetInitializer<ApplicationDbContext>(new DBInitializer());                 
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

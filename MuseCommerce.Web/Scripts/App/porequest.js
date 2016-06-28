@@ -9,7 +9,105 @@ ngdatepicker.factory('mydatepicker', [function () {
     return jquery; // assumes underscore has already been loaded on the page
 }]);
 
-var AppDependencies = ['ui.router', 'ngAnimate', 'ngDialog', 'vModal', 'underscore', 'ngdatepicker'];
+var ngpohttprest = angular.module('ngpohttprest', []);
+
+
+ngpohttprest.factory('httpItemCore',
+  function ($http, $q) {
+      return {
+          search: function (params) {
+              var defer = $q.defer();
+              $http({
+                  method: 'get',
+                  params: params,
+                  url: '/MGCode/Item/ItemCoreInfo'
+              }).success(function (data) {
+                  defer.resolve(data);
+              }).error(function (data) {
+                  defer.reject(data);
+              });
+              return defer.promise
+          }
+      };
+  });
+
+ngpohttprest.factory('httpPOTranTypeInfo',
+  function ($http, $q) {
+      return {
+          getPOTranTypeInfo: function () {
+              var defer = $q.defer();
+              $http({
+                  method: 'get',
+                  url: '/Order/PORequest/POTranTypeInfo'
+              }).success(function (data) {
+                  defer.resolve(data);
+              }).error(function (data) {
+                  defer.reject(data);
+              });
+              return defer.promise
+          }
+      };
+  });
+ngpohttprest.factory('httpPorequest',
+  function ($http, $q) {
+      return {
+          search: function (params) {
+              var defer = $q.defer();
+              $http({
+                  method: 'get',
+                  params: params,
+                  url: '/Order/PORequest/porequestInfo'
+              }).success(function (data) {
+                  defer.resolve(data);
+              }).error(function (data) {
+                  defer.reject(data);
+              });
+              return defer.promise
+          },
+          getbyId: function (Id) {
+              var defer = $q.defer();
+              var params = { 'ID': Id };
+              $http({
+                  method: 'get',
+                  params: params,
+                  url: '/Order/PORequest/porequest'
+              }).success(function (data) {
+                  defer.resolve(data);
+              }).error(function (data) {
+                  defer.reject(data);
+              });
+              return defer.promise
+          },
+          put: function (data) {
+              var defer = $q.defer();
+              $http({
+                  method: 'put',
+                  data: data,
+                  url: '/Order/PORequest/Putporequest'
+              }).success(function (data) {
+                  defer.resolve(data);
+              }).error(function (data) {
+                  defer.reject(data);
+              });
+              return defer.promise
+          },
+          save: function (data) {
+              var defer = $q.defer();
+              $http({
+                  method: 'post',
+                  data: data,
+                  url: '/Order/PORequest/Saveporequest'
+              }).success(function (data) {
+                  defer.resolve(data);
+              }).error(function (data) {
+                  defer.reject(data);
+              });
+              return defer.promise
+          }
+      };
+  });
+
+var AppDependencies = ['ui.router', 'ngAnimate', 'ngDialog', 'vModal', 'underscore', 'ngdatepicker', 'ngpohttprest'];
 var app = angular.module('porequestapp', AppDependencies);
 
 app.factory('SearchModal', function (vModal) {
@@ -103,34 +201,31 @@ app.filter("jsonDate", function ($filter) {
     };
 });
 
-app.controller('IndexporequestCtrl', function ($scope, $http, $state, $stateParams, mydatepicker) {
+app.controller('IndexporequestCtrl', function ($scope, $http, $state, $stateParams, mydatepicker, httpPorequest) {
     mydatepicker('[data-provide="datepicker-inline"]').datepicker();
     $scope.qbillno = "";
     $scope.qsdate = "";
     $scope.qedate = "";
 
     $scope.search = function () {
-        var config = { params: { 'qbillno': $scope.qbillno, 'qsdate': $scope.qsdate, 'qedate': $scope.qedate } };
-        $http.get("/Order/PORequest/porequestInfo", config)
-        .success(function (response) {
+        var config = { 'qbillno': $scope.qbillno, 'qsdate': $scope.qsdate, 'qedate': $scope.qedate };
+        httpPorequest.search(config).then(function (response) {
             $scope.porequests = response.data;
-        });
+        });        
     };
 
     $scope.search();
-
 });
 
-app.controller('EditporequestCtrl', function ($scope, $http, $state, $stateParams, SearchModal, mydatepicker) {
+app.controller('EditporequestCtrl', function ($scope, $http, $state, $stateParams, $rootScope, SearchModal, mydatepicker, httpPorequest, httpPOTranTypeInfo) {
     mydatepicker('[data-provide="datepicker-inline"]').datepicker();
-    $http.get("/Order/PORequest/POTranTypeInfo")
-        .success(function (response) {
-            $scope.POTranTypeInfo = response.data;
 
-            var config = { params: { 'ID': $stateParams.ID } };
-            $http.get("/Order/PORequest/porequest", config)
-            .success(function (response) { $scope.porequest = response.data; });
+    httpPOTranTypeInfo.getPOTranTypeInfo().then(function (response) {
+        $scope.POTranTypeInfo = response.data;
+        httpPorequest.getbyId($stateParams.ID).then(function (response) {
+            $scope.porequest = response.data;
         });
+    });
 
     SearchModal.itemadd = function (msg) {
         angular.forEach(msg, function (item) {
@@ -138,7 +233,7 @@ app.controller('EditporequestCtrl', function ($scope, $http, $state, $stateParam
 
                 var PORequestEntry = new Object();
 
-                PORequestEntry.FInterID = "Add";
+                PORequestEntry.Id = "Add";
                 PORequestEntry.FItemID = item.Id;
                 PORequestEntry.FItem = new Object();
                 PORequestEntry.FItem.FName = item.FName;
@@ -160,23 +255,21 @@ app.controller('EditporequestCtrl', function ($scope, $http, $state, $stateParam
     $scope.save = function () {
         var config = {};
         var data = $scope.porequest;
-        $http.put("/Order/PORequest/Putporequest", data, config)
-        .success(function (response) {
+       
+        httpPorequest.put(data).then(function (response) {
             $scope.success = response.success;
+            console.log(response.success);
+            $rootScope.$state.go('index');
         });
     };
-
-
 });
 
-app.controller('DisplayporequestCtrl', function ($scope, $http, $state, $stateParams) {
+app.controller('DisplayporequestCtrl', function ($scope, $http, $state, $stateParams, httpPorequest) {
     $scope.porequestid = $stateParams.ID;
+    
     $scope.loadporequest = function () {
-        var config = { params: { 'ID': $stateParams.ID } };
-        $http.get("/Order/PORequest/porequest", config)
-        .success(function (response) {
+        httpPorequest.getbyId($stateParams.ID).then(function (response) {
             $scope.porequest = response.data;
-            console.log($scope.porequest);
         });
     };
 
@@ -184,18 +277,17 @@ app.controller('DisplayporequestCtrl', function ($scope, $http, $state, $statePa
 
 });
 
-app.controller('CreateporequestCtrl', function ($scope, $http, $state, $stateParams, SearchModal, _, mydatepicker) {
+app.controller('CreateporequestCtrl', function ($scope, $http, $state, $stateParams, $rootScope, SearchModal, _, mydatepicker, httpPOTranTypeInfo, httpPorequest) {
     mydatepicker('[data-provide="datepicker-inline"]').datepicker();
-    $http.get("/Order/PORequest/POTranTypeInfo")
-        .success(function (response) {
-            $scope.POTranTypeInfo = response.data;
 
-            $scope.porequest = {
-                'Id': "", "FBillNo": "", "FDate": "", "FNote": "", "FTranType": "",
-                "FStatus": "", "PoAddress": { "StreetNumber": "", "StreetName": "" },
-                "PORequestEntrys": []
-            };
-        });
+    httpPOTranTypeInfo.getPOTranTypeInfo().then(function (response) { 
+        $scope.POTranTypeInfo = response.data;
+        $scope.porequest = {
+            'Id': "", "FBillNo": "", "FDate": "", "FNote": "", "FTranType": "",
+            "FStatus": "", "PoAddress": { "StreetNumber": "", "StreetName": "" },
+            "PORequestEntrys": []
+        };
+    });
     
     SearchModal.itemadd = function (msg) {
         angular.forEach(msg, function (item) {
@@ -221,14 +313,12 @@ app.controller('CreateporequestCtrl', function ($scope, $http, $state, $statePar
     $scope.save = function () {       
         var config = {};
         var data = $scope.porequest;
-        console.log(data);
-        return;
-        $http.post("/Order/PORequest/Saveporequest", data, config)
-        .success(function (response) {
+        
+        httpPorequest.save(data).then(function (response) {
             $scope.success = response.success;
-        });       
+            $rootScope.$state.go('index');
+        });
     };
-
     
     $scope.open = function () {
         SearchModal.activate();
@@ -237,7 +327,7 @@ app.controller('CreateporequestCtrl', function ($scope, $http, $state, $statePar
 
 });
 
-app.controller('IndexmgitemCtrl', function ($scope, $http, $state, $stateParams, SearchModal) {
+app.controller('IndexmgitemCtrl', function ($scope, $http, $state, $stateParams, SearchModal, httpItemCore) {
     var ctrl = this;
 
     ctrl.close = SearchModal.deactivate;
@@ -251,16 +341,11 @@ app.controller('IndexmgitemCtrl', function ($scope, $http, $state, $stateParams,
 
 
     $scope.search = function () {
-        var config = {
-            params: {
+        var config = {           
                 'qname': $scope.qname, 'qnumber': $scope.qnumber,
-                'start': $scope.start, 'length': $scope.length
-            }
+                'start': $scope.start, 'length': $scope.length           
         };
-        
-        $http.get("/MGCode/Item/ItemCoreInfo", config)
-        .success(function (response) {
-
+        httpItemCore.search(config).then(function (response) {
             angular.forEach(response.data, function (item) {
                 item.check = false;
             });
@@ -270,7 +355,7 @@ app.controller('IndexmgitemCtrl', function ($scope, $http, $state, $stateParams,
             $scope.mgitems = response.data;
 
             $scope.pagination();
-        });
+        });        
     };
 
     $scope.query = function () {

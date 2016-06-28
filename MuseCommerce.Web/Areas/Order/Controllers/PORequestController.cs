@@ -19,7 +19,7 @@ namespace MuseCommerce.Web.Areas.Order.Controllers
             return View();
         }
 
-        public JsonResult PORequestInfo(string FBillNo, DateTime? qsdate, DateTime? qedate)
+        public JsonResult PORequestInfo(string qbillno, DateTime? qsdate, DateTime? qedate)
         {
             JsonResult json = new JsonResult() { };
             json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
@@ -32,9 +32,9 @@ namespace MuseCommerce.Web.Areas.Order.Controllers
                 IQueryable<PORequest> Temp = context.Set<PORequest>();
 
                 total = Temp.Count();
-                if (!string.IsNullOrEmpty(FBillNo))
+                if (!string.IsNullOrEmpty(qbillno))
                 {
-                    Temp = Temp.Where(p => p.FBillNo.StartsWith(FBillNo));
+                    Temp = Temp.Where(p => p.FBillNo.StartsWith(qbillno));
                 }
                 if (qsdate.HasValue==true)
                 {
@@ -114,26 +114,97 @@ namespace MuseCommerce.Web.Areas.Order.Controllers
         {
             JsonResult json = new JsonResult() { };
             json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-
-            using (ApplicationDbContext context = new ApplicationDbContext())
+            string errmsg = "";
+            try
             {
-                context.Configuration.ProxyCreationEnabled = false;
-
-
-                var oTemp = context.Set<PORequest>().Where(p => p.Id == oData.Id).First();
-              
-
-                context.SaveChanges();
-
-                var items = new
+                using (ApplicationDbContext context = new ApplicationDbContext())
                 {
-                    success = true
-                };
+                    #region
+                    context.Configuration.ProxyCreationEnabled = false;
+                    var oTemp = context.Set<PORequest>().Include("PORequestEntrys")
+                        .Where(p => p.Id == oData.Id).First();
 
-                json.Data = items;
+                    oTemp.FDate = oData.FDate;
+                    oTemp.FTranType = oData.FTranType;
+                    oTemp.PoAddress.StreetName = oData.PoAddress.StreetName;
+                    oTemp.PoAddress.StreetNumber = oData.PoAddress.StreetNumber;
+                    oTemp.FNote = oData.FNote;
 
-                return json;
+
+                    oTemp.ModifiedBy = User.Identity.Name;
+                    oTemp.ModifiedDate = DateTime.Now;
+
+                    if (oData.PORequestEntrys != null)
+                    {
+                        foreach (var item in oData.PORequestEntrys)
+                        {
+                            if (item.Id == "Add")
+                            {
+                                item.FInterID = oData.Id;
+                                item.Id = Guid.NewGuid().ToString();
+                                item.CreatedDate = DateTime.Now;
+                                item.CreatedBy = User.Identity.Name;
+                            }
+                            item.FItem = null;
+                        }
+                    }
+
+                    oData.PORequestEntrys.ForEach(item =>
+                    {
+                        if (!oTemp.PORequestEntrys.Exists(m => m.Id == item.Id))
+                        {                            
+                            oTemp.PORequestEntrys.Add(item);
+                        }
+                    });
+
+                    for (int i = 0; i < oTemp.PORequestEntrys.Count; i++)
+                    {
+                        var item = oTemp.PORequestEntrys[i];
+                        if (oData.PORequestEntrys.Exists(m => m.Id == item.Id))
+                        {
+                            var modifitem = oData.PORequestEntrys.Where(p => p.Id == item.Id).First();
+                            item.FQty = modifitem.FQty;
+                            item.FPrice = modifitem.FPrice;
+                        }
+                    };
+
+                    for (int i = 0; i < oTemp.PORequestEntrys.Count; i++)
+                    {
+                        var item = oTemp.PORequestEntrys[i];
+                        if (!oData.PORequestEntrys.Exists(m => m.Id == item.Id))
+                        {
+                            oTemp.PORequestEntrys.Remove(item);
+                        }
+                    };
+
+                    context.SaveChanges();
+
+                    #endregion
+
+                }
             }
+            catch (DbEntityValidationException ex)
+            {
+                errmsg = ex.ToString();
+                MvcApplication.mySource.TraceEvent(TraceEventType.Error, 1, ex.ToString());
+                MvcApplication.mySource.TraceInformation("Informational message.");
+            }
+            catch (Exception ex)
+            {
+                errmsg = ex.ToString();
+                MvcApplication.mySource.TraceEvent(TraceEventType.Error, 1, ex.ToString());
+                MvcApplication.mySource.TraceInformation("Informational message.");
+            }
+
+            
+            var items = new
+            {
+                success = true
+            };
+
+            json.Data = items;
+
+            return json;
         }
 
         public ActionResult CreateJ()
@@ -188,8 +259,7 @@ namespace MuseCommerce.Web.Areas.Order.Controllers
                 errmsg = ex.ToString();
                 MvcApplication.mySource.TraceEvent(TraceEventType.Error, 1, ex.ToString());
                 MvcApplication.mySource.TraceInformation("Informational message.");
-            }
-            
+            }            
             catch (Exception ex)
             {
                 errmsg = ex.ToString();
