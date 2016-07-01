@@ -1,4 +1,6 @@
-﻿using Microsoft.Practices.EnterpriseLibrary.Logging;
+﻿using Common.Logging;
+using Common.Logging.Simple;
+using Microsoft.Practices.EnterpriseLibrary.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -58,6 +60,5 @@ namespace MuseCommerce.Core.Log
         {
             Writer(TraceEventType.Verbose, Message);
         }
-
     }
 }

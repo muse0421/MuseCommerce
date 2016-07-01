@@ -117,7 +117,7 @@ namespace MuseCommerce.Web.Controllers
             //    var result = await UserManager.CreateAsync(user2, "xiaohui");
             //    //await SignInManager.SignInAsync(user1, isPersistent: false, rememberBrowser: false);
             //}
-            _logging.Information("注入消息");
+            //_logging.Information("注入消息");
 
             Debug.WriteLine("AuthenticationManager.User.Identity.Name in =" + AuthenticationManager.User.Identity.Name);
 

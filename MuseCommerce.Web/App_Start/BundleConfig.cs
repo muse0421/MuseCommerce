@@ -109,6 +109,9 @@ namespace MuseCommerce.Web
             bundles.Add(new ScriptBundle("~/bundles/porequest").Include(
                        "~/Scripts/App/porequest.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/mgjobapp").Include(
+                       "~/Scripts/App/mgjob.js"));
+
             #endregion
         }
     }

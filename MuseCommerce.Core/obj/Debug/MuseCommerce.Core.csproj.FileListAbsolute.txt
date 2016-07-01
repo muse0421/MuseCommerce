@@ -53,4 +53,13 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\System.Web.Razo
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\System.Web.WebPages.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\System.Web.WebPages.Deployment.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Common.Logging.Core.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Common.Logging.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Quartz.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Common.Logging.pdb
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Common.Logging.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Common.Logging.Core.pdb
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Common.Logging.Core.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Quartz.pdb
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Quartz.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\obj\Debug\MuseCommerce.Core.csprojResolveAssemblyReference.cache

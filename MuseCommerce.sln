@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseCommerce.Core", "MuseCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseCommerce.Web", "MuseCommerce.Web\MuseCommerce.Web.csproj", "{F39FCA77-9F23-4C19-8915-D0D223ED2E0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseRemoteScheduler.Server", "MuseRemoteScheduler.Server\MuseRemoteScheduler.Server.csproj", "{0A538D6B-C061-4762-90FA-7BDC6C9BB5E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,11 +31,16 @@ Global
 		{F39FCA77-9F23-4C19-8915-D0D223ED2E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F39FCA77-9F23-4C19-8915-D0D223ED2E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F39FCA77-9F23-4C19-8915-D0D223ED2E0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A538D6B-C061-4762-90FA-7BDC6C9BB5E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A538D6B-C061-4762-90FA-7BDC6C9BB5E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A538D6B-C061-4762-90FA-7BDC6C9BB5E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A538D6B-C061-4762-90FA-7BDC6C9BB5E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Logging.5.0.505.0\lib\NET35;packages\EntLibContrib.Logging.5.0.505.0\lib\NET35
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.PolicyInjection.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.Database.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.Logging.6.0.1304.0\lib\NET45
 	EndGlobalSection
 	GlobalSection(Performance) = preSolution

@@ -10,6 +10,8 @@ using MuseCommerce.Data.Model.Security;
 using MuseCommerce.Web.SignalR;
 using MuseCommerce.Core.Security;
 using MuseCommerce.Data.Security;
+using Quartz.Impl;
+using MuseCommerce.Core.Schedule;
 
 namespace MuseCommerce.Web.Areas.Manage.Controllers
 {
@@ -44,7 +46,7 @@ namespace MuseCommerce.Web.Areas.Manage.Controllers
             {
                 context.Configuration.ProxyCreationEnabled = false;
                 IQueryable<MGRole> Temp = context.Set<MGRole>();
-               
+
                 if (!string.IsNullOrEmpty(qname))
                 {
                     Temp = Temp.Where(p => p.FName.StartsWith(qname));

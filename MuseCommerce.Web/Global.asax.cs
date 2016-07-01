@@ -1,4 +1,8 @@
-﻿using MuseCommerce.Data.Repositories;
+﻿using MuseCommerce.Core.Log;
+using MuseCommerce.Core.Schedule;
+using MuseCommerce.Data.Repositories;
+using Quartz;
+using Quartz.Impl;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,9 +15,12 @@ using System.Web.Routing;
 
 namespace MuseCommerce.Web
 {
+    
+
     public class MvcApplication : System.Web.HttpApplication
     {
         public static TraceSource mySource = new TraceSource("TraceSourceApp");
+        MuseSchedulerFactory schedulerFactory;
 
         protected void Application_Start()
         {
@@ -40,16 +47,20 @@ namespace MuseCommerce.Web
             //    MvcApplication.mySource.TraceEvent(TraceEventType.Error, 1, ex.ToString());
             //    MvcApplication.mySource.TraceInformation("Informational message.");
             //}
+           
             
-            
-
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //schedulerFactory = new MuseSchedulerFactory();
+            //schedulerFactory.Start();
+            //schedulerFactory.AddMyJob("myjob1", "default", "job1 message my name");
         }
 
+     
         protected void Application_Error(Object sender, EventArgs e)
         {
             Exception exception = Server.GetLastError();
@@ -58,6 +69,7 @@ namespace MuseCommerce.Web
 
         protected void Application_Exit(Object sender, EventArgs e)
         {
+            schedulerFactory.Shutdown();
             mySource.Close();
         }
     }

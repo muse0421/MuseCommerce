@@ -170,3 +170,17 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\System.Web.WebPages.Ra
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Microsoft.Practices.Unity.Mvc.dll
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\WebActivatorEx.dll
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Microsoft.Practices.Unity.Mvc.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Common.Logging.Core.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Common.Logging.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Quartz.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Common.Logging.pdb
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Common.Logging.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Common.Logging.Core.pdb
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Common.Logging.Core.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Quartz.pdb
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Quartz.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\CrystalQuartz.Core.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\CrystalQuartz.Web.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Common.Logging.EntLib60.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Common.Logging.EntLib60.pdb
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Common.Logging.EntLib60.xml
