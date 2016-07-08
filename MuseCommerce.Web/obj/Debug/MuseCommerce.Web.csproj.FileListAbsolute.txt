@@ -184,3 +184,13 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\CrystalQuartz.Web.dll
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Common.Logging.EntLib60.dll
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Common.Logging.EntLib60.pdb
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\Common.Logging.EntLib60.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\ServiceStack.Common.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\ServiceStack.Interfaces.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\ServiceStack.Redis.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\ServiceStack.Text.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\ServiceStack.Common.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\ServiceStack.Redis.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\ServiceStack.Text.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\protobuf-net.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\protobuf-net.pdb
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Web\bin\protobuf-net.xml

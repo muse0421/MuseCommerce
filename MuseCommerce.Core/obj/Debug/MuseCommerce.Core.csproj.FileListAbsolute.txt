@@ -62,4 +62,14 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Common.Logging.
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Common.Logging.Core.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Quartz.pdb
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\Quartz.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\ServiceStack.Common.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\ServiceStack.Interfaces.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\ServiceStack.Redis.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\ServiceStack.Text.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\ServiceStack.Common.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\ServiceStack.Redis.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\ServiceStack.Text.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\protobuf-net.dll
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\protobuf-net.pdb
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\bin\Debug\protobuf-net.xml
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Core\obj\Debug\MuseCommerce.Core.csprojResolveAssemblyReference.cache

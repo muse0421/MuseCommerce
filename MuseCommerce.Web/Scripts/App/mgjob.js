@@ -81,8 +81,19 @@ app.controller('IndexMGJobCtrl', function ($scope, $http, $state, $stateParams) 
     $scope.search = function () {
         console.log('search');
     };
-       
 
+    $scope.Enqueue = function () {
+
+        $scope.mgmessage = { 'message': '123' };
+
+        $http.put("/Manage/MGJob/InQuene", $scope.mgmessage)
+           .success(function (response) {
+               console.log(response);
+           });
+
+    };
+       
+    
     $scope.search();
 
 });

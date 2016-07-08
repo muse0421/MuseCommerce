@@ -20,8 +20,7 @@ namespace MuseCommerce.Web
     public class MvcApplication : System.Web.HttpApplication
     {
         public static TraceSource mySource = new TraceSource("TraceSourceApp");
-        MuseSchedulerFactory schedulerFactory;
-
+        
         protected void Application_Start()
         {
             mySource.TraceEvent(TraceEventType.Error, 1, "Error message.");
@@ -68,8 +67,7 @@ namespace MuseCommerce.Web
         }
 
         protected void Application_Exit(Object sender, EventArgs e)
-        {
-            schedulerFactory.Shutdown();
+        {            
             mySource.Close();
         }
     }
