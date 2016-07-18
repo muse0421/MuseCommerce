@@ -1,0 +1,53 @@
+﻿<div class="col-sm-8" ng-controller="DisplayorgcodeCtrl">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="m-b-md">
+                            <a ui-sref="index" class="btn btn-white btn-xs pull-right">返回</a>
+                            <a ui-sref="edit({ID:'{{orgcodeid}}'})" class="btn btn-primary btn-xs pull-right">编辑</a>
+                            <h2>{{orgcode.FName}}</h2>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <dl class="dl-horizontal">
+                            <dt>工號:</dt>
+                            <dd>{{orgcode.FNumber}}</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>姓名:</dt>
+                            <dd>{{orgcode.FName}}</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>部門:</dt>
+                            <dd>{{orgcode.FDepartment.Description}}</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>職務:</dt>
+                            <dd>{{orgcode.FORGDuty.Description}}</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>员工组:</dt>
+                            <dd>{{orgcode.FEmpGroupID}}</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>入职日期:</dt>
+                            <dd>{{orgcode.FHireDate }}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-sm-4">
+                       
+                            <img src="/img/{{orgcode.Id}}.jpg" width="120px" height="450px" class="img-responsive">
+                           
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

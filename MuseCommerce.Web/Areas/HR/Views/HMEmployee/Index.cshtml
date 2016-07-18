@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section styles {
+    @Styles.Render("~/Content/DataTables")
+    @Styles.Render("~/Content/webuploader")
+}
+
+<div class="row" ng-app="orgcodeApp" ng-controller="orgcodeCtrl">
+    <div ui-view></div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/DataTables")
+    @Scripts.Render("~/bundles/webuploader")
+    @Scripts.Render("~/bundles/baseform")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/angularui")
+    @Scripts.Render("~/bundles/ngbaseform")
+   
+
+    @Scripts.Render("~/bundles/HMEmployee")
+}

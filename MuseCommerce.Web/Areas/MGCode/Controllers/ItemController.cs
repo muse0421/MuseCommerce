@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace MuseCommerce.Web.Areas.MGCode.Controllers
 {
-    public class ItemController : Controller
+    public class ItemController : MuseController
     {
         // GET: MGCode/Item
         public ActionResult Index()

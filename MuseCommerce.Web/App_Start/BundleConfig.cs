@@ -32,7 +32,9 @@ namespace MuseCommerce.Web
            
             bundles.Add(new StyleBundle("~/Content/DataTables").Include(
                    "~/Content/plugins/bootstrap-table/bootstrap-table.min.css"));
-          
+
+            bundles.Add(new StyleBundle("~/Content/webuploader").Include(
+                  "~/Content/plugins/webuploader/webuploader.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                       "~/Scripts/jquery.min.js"));
@@ -56,6 +58,9 @@ namespace MuseCommerce.Web
             bundles.Add(new ScriptBundle("~/bundles/DataTables").Include(
                        "~/Scripts/plugins/dataTables/jquery.dataTables.js",
                        "~/Scripts/plugins/dataTables/dataTables.bootstrap.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/webuploader").Include(                       
+                       "~/Scripts/plugins/webuploader/webuploader.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/baseform").Include(
                                     "~/Scripts/plugins/datapicker/bootstrap-datepicker.js",
@@ -111,6 +116,15 @@ namespace MuseCommerce.Web
 
             bundles.Add(new ScriptBundle("~/bundles/mgjobapp").Include(
                        "~/Scripts/App/mgjob.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ORGDuty").Include(
+                      "~/Scripts/App/ORGDuty.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ORGDepartment").Include(
+                      "~/Scripts/App/ORGDepartment.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/HMEmployee").Include(
+                     "~/Scripts/App/HMEmployee.js"));
 
             #endregion
         }

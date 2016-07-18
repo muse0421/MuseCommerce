@@ -117,3 +117,6 @@ D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\ServiceStack.Co
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\protobuf-net.dll
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\protobuf-net.pdb
 D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\bin\Debug\protobuf-net.xml
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.Repositories.Migrations.hr_base.resources
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.Repositories.Migrations.HR_relation.resources
+D:\Lession\MuseCommerce\MuseCommerce\MuseCommerce.Data\obj\Debug\MuseCommerce.Data.Repositories.Migrations.HR_EMP.resources

@@ -76,6 +76,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\HR\ORGDepartment.cs" />
+    <Compile Include="Model\HR\HMEmployee.cs" />
+    <Compile Include="Model\HR\HMPerson.cs" />
+    <Compile Include="Model\HR\ORGPDescriptionDuty.cs" />
     <Compile Include="Model\Security\MGFunc.cs" />
     <Compile Include="Model\ItemCore.cs" />
     <Compile Include="Model\Security\AccountState.cs" />
@@ -125,6 +129,18 @@
     <Compile Include="Repositories\Migrations\201606170542432_Item.Designer.cs">
       <DependentUpon>201606170542432_Item.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\Migrations\201607140634184_hr_base.cs" />
+    <Compile Include="Repositories\Migrations\201607140634184_hr_base.Designer.cs">
+      <DependentUpon>201607140634184_hr_base.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\Migrations\201607140817504_HR_relation.cs" />
+    <Compile Include="Repositories\Migrations\201607140817504_HR_relation.Designer.cs">
+      <DependentUpon>201607140817504_HR_relation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\Migrations\201607180227329_HR_EMP.cs" />
+    <Compile Include="Repositories\Migrations\201607180227329_HR_EMP.Designer.cs">
+      <DependentUpon>201607180227329_HR_EMP.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\Migrations\ApplicationDbConfiguration.cs" />
     <Compile Include="Security\Identity\ApplicationSignInManager.cs" />
     <Compile Include="Security\Identity\ApplicationUser.cs" />
@@ -173,6 +189,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositories\Migrations\201606170542432_Item.resx">
       <DependentUpon>201606170542432_Item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositories\Migrations\201607140634184_hr_base.resx">
+      <DependentUpon>201607140634184_hr_base.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositories\Migrations\201607140817504_HR_relation.resx">
+      <DependentUpon>201607140817504_HR_relation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositories\Migrations\201607180227329_HR_EMP.resx">
+      <DependentUpon>201607180227329_HR_EMP.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Security\Identity\Migrations\201605120647332_Initial.resx">
       <DependentUpon>201605120647332_Initial.cs</DependentUpon>

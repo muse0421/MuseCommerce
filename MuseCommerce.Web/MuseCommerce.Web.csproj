@@ -271,6 +271,9 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\HR\Controllers\HMEmployeeController.cs" />
+    <Compile Include="Areas\HR\Controllers\HMPersonController.cs" />
+    <Compile Include="Areas\HR\HRAreaRegistration.cs" />
     <Compile Include="Areas\Manage\Controllers\MGAccountController.cs" />
     <Compile Include="Areas\Manage\Controllers\MGFuncController.cs" />
     <Compile Include="Areas\Manage\Controllers\MGJobController.cs" />
@@ -278,6 +281,8 @@
     <Compile Include="Areas\Manage\Controllers\MGRoleController.cs" />
     <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
     <Compile Include="Areas\MGCode\Controllers\ItemController.cs" />
+    <Compile Include="Areas\MGCode\Controllers\ORGDepartmentController.cs" />
+    <Compile Include="Areas\MGCode\Controllers\ORGPDescriptionDutyController.cs" />
     <Compile Include="Areas\MGCode\MGCodeAreaRegistration.cs" />
     <Compile Include="Areas\Order\Controllers\PORequestController.cs" />
     <Compile Include="Areas\Order\OrderAreaRegistration.cs" />
@@ -2594,12 +2599,23 @@
     <Content Include="Scripts\angularjs-latest\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\angularjs-latest\version.txt" />
     <Content Include="Scripts\App\mgaccount.js" />
+    <Content Include="Scripts\App\ORGDepartment.js" />
+    <Content Include="Scripts\App\HMEmployee.js" />
+    <Content Include="Scripts\App\ORGDuty.js" />
     <Content Include="Scripts\App\mgjob.js" />
     <Content Include="Scripts\App\mgpermission.js" />
     <Content Include="Scripts\App\mgitem.js" />
     <Content Include="Scripts\App\mgrole.js" />
     <Content Include="Scripts\App\porequest.js" />
     <Content Include="Scripts\App\mgfunc.js" />
+    <Content Include="Scripts\App\tpls\HMEmployee\create.tpl.html" />
+    <Content Include="Scripts\App\tpls\HMEmployee\display.tpl.html" />
+    <Content Include="Scripts\App\tpls\HMEmployee\edit.tpl.html" />
+    <Content Include="Scripts\App\tpls\HMEmployee\index.tpl.html" />
+    <Content Include="Scripts\App\tpls\ORGCode\create.tpl.html" />
+    <Content Include="Scripts\App\tpls\ORGCode\display.tpl.html" />
+    <Content Include="Scripts\App\tpls\ORGCode\edit.tpl.html" />
+    <Content Include="Scripts\App\tpls\ORGCode\index.tpl.html" />
     <Content Include="Scripts\App\tpls\mgitem\create.tpl.html" />
     <Content Include="Scripts\App\tpls\mgitem\display.tpl.html" />
     <Content Include="Scripts\App\tpls\mgitem\edit.tpl.html" />
@@ -2790,6 +2806,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\HR\Models\" />
+    <Folder Include="Areas\HR\Views\Shared\" />
     <Folder Include="Areas\Manage\Controllers\Api\" />
     <Folder Include="Areas\Manage\Models\" />
     <Folder Include="Areas\Manage\Views\Shared\" />
@@ -2838,6 +2856,11 @@
     <Content Include="Areas\Order\Views\PORequest\Edit.cshtml" />
     <Content Include="Areas\Order\Views\PORequest\CreateJ.cshtml" />
     <Content Include="Areas\Manage\Views\MGJob\Index.cshtml" />
+    <Content Include="Areas\HR\Views\web.config" />
+    <Content Include="Areas\MGCode\Views\ORGDepartment\Index.cshtml" />
+    <Content Include="Areas\MGCode\Views\ORGPDescriptionDuty\Index.cshtml" />
+    <Content Include="Areas\HR\Views\HMPerson\Index.cshtml" />
+    <Content Include="Areas\HR\Views\HMEmployee\Index.cshtml" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>

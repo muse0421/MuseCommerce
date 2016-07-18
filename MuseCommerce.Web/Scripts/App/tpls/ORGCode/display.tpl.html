@@ -1,0 +1,32 @@
+﻿<div class="col-sm-6" ng-controller="DisplayorgcodeCtrl">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="m-b-md">
+                            <a ui-sref="index" class="btn btn-white btn-xs pull-right">返回</a>
+                            <a ui-sref="edit({ID:'{{orgcodeid}}'})" class="btn btn-primary btn-xs pull-right">编辑</a>
+                            <h2>{{orgcode.Description}}</h2>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <dl class="dl-horizontal">
+                            <dt>代碼:</dt>
+                            <dd>{{orgcode.SerialNo}}</dd>
+                        </dl>                        
+                        <dl class="dl-horizontal">
+                            <dt>描述:</dt>
+                            <dd>{{orgcode.Description}}</dd>
+                        </dl>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

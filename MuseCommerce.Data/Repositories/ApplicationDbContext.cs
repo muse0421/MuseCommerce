@@ -1,4 +1,5 @@
 ﻿using MuseCommerce.Data.Model;
+using MuseCommerce.Data.Model.HR;
 using MuseCommerce.Data.Model.Security;
 using MuseCommerce.Data.Repositories.EntityTypeConfiguration;
 using System;
@@ -34,6 +35,14 @@ namespace MuseCommerce.Data.Repositories
         public DbSet<PORequest> PORequest { set; get; }
 
         public DbSet<PORequestEntry> PORequestEntry { set; get; }
+
+        public DbSet<ORGDepartment> ORGDepartment { set; get; }
+
+        public DbSet<ORGPDescriptionDuty> ORGPDescriptionDuty { set; get; }
+
+        public DbSet<HMPerson> HMPerson { set; get; }
+
+        public DbSet<HMEmployee> HMEmployee { set; get; }
 
         public ApplicationDbContext()
             : base("SeCommerce2")

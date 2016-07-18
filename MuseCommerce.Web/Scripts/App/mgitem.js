@@ -102,20 +102,19 @@ app.controller('IndexmgitemCtrl', function ($scope, $http, $state, $stateParams)
 
     $scope.setpagination = function (pageflag) {
         
-        switch (pageflag)
-        {
+        switch (pageflag) {
             case "first":
-                $scope.start = 0;
+                if ($scope.first) { $scope.start = 0 };
                 break;
             case "prev":
-                $scope.start = ($scope.pageIndex - 2) * $scope.length;
+                if ($scope.prev) { $scope.start = ($scope.pageIndex - 2) * $scope.length };
                 break;
             case "next":
-                $scope.start = ($scope.pageIndex ) * $scope.length;
+                if ($scope.next) { $scope.start = ($scope.pageIndex) * $scope.length };
                 break;
             case "last":
-                $scope.start = ($scope.endIndex - 1) * $scope.length;
-                break;                
+                if ($scope.last) { $scope.start = ($scope.endIndex - 1) * $scope.length };
+                break;
         }
         $scope.search();
     }

@@ -56,8 +56,8 @@
                             </span>
                         </td>
                         <td class="project-actions">
-                            <a ng-if="!x.FForbidden"  data-ng-click="forbidden(x.Id)" class="btn btn-white btn-sm"><i class="fa fa-bell-slash-o"></i> 禁用 </a>
-                            <a ng-if="x.FForbidden"  data-ng-click="restore(x.Id)" class="btn btn-white btn-sm"><i class="fa fa-bell-o"></i> 恢復 </a>
+                            <a ng-if="!x.FForbidden" data-ng-click="forbidden(x.Id)" class="btn btn-white btn-sm"><i class="fa fa-bell-slash-o"></i> 禁用 </a>
+                            <a ng-if="x.FForbidden" data-ng-click="restore(x.Id)" class="btn btn-white btn-sm"><i class="fa fa-bell-o"></i> 恢復 </a>
                         </td>
                         <td class="project-actions">
                             <a ui-sref="display({ID:'{{ x.Id }}'})" class="btn btn-white btn-sm"><i class="fa fa-info"></i> 查看 </a>
@@ -70,14 +70,14 @@
                     <tr>
                         <td colspan="7" class="footable-visible">
                             <ul class="pagination pull-left">
-                                <li class="footable-page disabled"><div>显示 {{start+1}} 到 {{start+length>recordsTotal?recordsTotal:start+length}} 项，共 {{recordsTotal}} 项</div></li>        
-                                </ul>
+                                <li class="footable-page disabled"><div>显示 {{start+1}} 到 {{start+length>recordsTotal?recordsTotal:start+length}} 项，共 {{recordsTotal}} 项</div></li>
+                            </ul>
                             <ul class="pagination pull-right">
-                            <li class="footable-page-arrow"><a ng-click="setpagination('first')" ng-if="first" data-page="first">«</a></li>
-                            <li class="footable-page-arrow"><a ng-click="setpagination('prev')" ng-if="prev" data-page="prev">‹</a></li>
-                            <li class="footable-page disabled"><a>{{ pageIndex }}</a></li>                            
-                            <li class="footable-page-arrow"><a ng-click="setpagination('next')" ng-if="next" data-page="next">›</a></li>
-                            <li class="footable-page-arrow"><a ng-click="setpagination('last')" ng-if="last" data-page="last">»</a></li>
+                                <li ng-class="{disabled:!first}"><a ng-click="setpagination('first')" data-page="first">«</a></li>
+                                <li ng-class="{disabled:!prev}"><a ng-click="setpagination('prev')"  data-page="prev">‹</a></li>
+                                <li class="disabled"><a>{{ pageIndex }}</a></li>
+                                <li ng-class="{disabled:!next}"><a ng-click="setpagination('next')" data-page="next">›</a></li>
+                                <li ng-class="{disabled:!last}"><a ng-click="setpagination('last')" data-page="last">»</a></li>
                             </ul>
                         </td>
                     </tr>

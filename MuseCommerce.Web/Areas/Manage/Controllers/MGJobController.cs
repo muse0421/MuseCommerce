@@ -13,7 +13,7 @@ using System.Xml;
 
 namespace MuseCommerce.Web.Areas.Manage.Controllers
 {
-    public class MGJobController : Controller
+    public class MGJobController :MuseController
     {
         // GET: Manage/MGJob
         public ActionResult Index()
